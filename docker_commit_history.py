@@ -1,10 +1,4 @@
 #!/usr/bin/env python
-
-import sys
-import subprocess
-import json
-
-
 """
 Goal:
     Show commit messages of a docker image recursively,
@@ -31,6 +25,10 @@ Example:
     27d47432a69 "" ""
     511136ea3c5 "" "Imported from -"
 """
+
+import sys
+import subprocess
+import json
 
 
 def print_commit(image_id):
