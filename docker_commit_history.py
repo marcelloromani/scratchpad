@@ -39,6 +39,8 @@ def print_commit(image_id):
     json_obj = json.loads(subprocess.check_output(["sudo", "docker", "inspect", image_id]))
 
     image_id  = json_obj[0]["Id"]
+    if ':' in image_id:
+        image_id  = image_id.split(':')[1]
     comment   = json_obj[0]["Comment"]
     parent_id = json_obj[0]["Parent"]
     author    = json_obj[0]["Author"]
