@@ -85,7 +85,7 @@ def send_email(friend_from, friend_to):
     msg['From'] = 'Santa'
     msg['To'] = friend_from['name']
 
-    logger.debug("From: {0} To: ({1})".format(friend_from['name'], friend_to['name']))
+    logger.debug("From: {0} To: {1}".format(friend_from['name'], friend_to['name']))
     #logger.debug("msg = " + msg.as_string())
 
     logger.info("Sending...")
