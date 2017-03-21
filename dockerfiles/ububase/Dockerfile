@@ -8,6 +8,8 @@ RUN apt-get -qy update && \
     host           \
     openssh-server \
     git            \
+    tmux           \
+    links2         \
     sudo
 
 RUN adduser --system --ingroup sudo --shell /bin/bash admin
