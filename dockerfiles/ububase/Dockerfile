@@ -18,5 +18,7 @@ RUN echo "admin:admin" | chpasswd
 COPY ./motd /etc/motd
 RUN echo "cat /etc/motd" >> /etc/bash.bashrc
 
+COPY sudoers_admin /etc/sudoers.d/admin
+
 USER admin
 WORKDIR /home/admin
