@@ -15,10 +15,15 @@ RUN apt-get -qy update && \
 
 RUN adduser --system --ingroup sudo --shell /bin/bash admin
 RUN echo "admin:admin" | chpasswd
-COPY ./motd /etc/motd
+COPY files/motd /etc/motd
 RUN echo "cat /etc/motd" >> /etc/bash.bashrc
 
-COPY sudoers_admin /etc/sudoers.d/admin
+COPY files/sudoers_admin /etc/sudoers.d/admin
 
 USER admin
 WORKDIR /home/admin
+
+RUN mkdir .ssh
+COPY files/id_rsa .ssh/
+COPY files/id_rsa.pub .ssh/
+COPY files/id_rsa.pub .ssh/authorized_keys
