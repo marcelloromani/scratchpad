@@ -10,7 +10,8 @@ RUN apt-get -qy update && \
     git            \
     tmux           \
     links2         \
-    sudo
+    sudo        && \
+    apt-get -y autoremove
 
 RUN adduser --system --ingroup sudo --shell /bin/bash admin
 RUN echo "admin:admin" | chpasswd
