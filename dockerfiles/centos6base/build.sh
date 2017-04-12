@@ -4,4 +4,4 @@
 IMAGE_NAME=centosbase:6.8
 
 docker build -t $IMAGE_NAME .
-docker push
+#docker push
