@@ -1,4 +1,6 @@
 #!/bin/bash
 
-docker build -t marcelloromani1975/ububase:16.04 .
+IMAGE_NAME=marcelloromani1975/ububase:16.04
+
+docker build -t $IMAGE_NAME .
 docker push
