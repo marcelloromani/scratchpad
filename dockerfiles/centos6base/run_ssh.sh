@@ -2,8 +2,8 @@
 
 SSH_PORT=2222
 
-#IMAGE_NAME=marcelloromani1975/centosbase:6.8
-IMAGE_NAME=centosbase:6.8
+IMAGE_NAME=marcelloromani1975/centosbase:6.8
+#IMAGE_NAME=centosbase:6.8
 
 echo "Connec to the host with:"
 echo "ssh -p $SSH_PORT admin@localhost"
