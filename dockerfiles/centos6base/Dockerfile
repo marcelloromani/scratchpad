@@ -32,4 +32,6 @@ RUN chmod 644 .ssh/authorized_keys
 
 USER admin
 
+EXPOSE 22
+
 CMD ["/bin/bash", "-c", "echo -e \"SSH credentials:\nusername: admin\npassword: admin\nPrivate key:\n$(cat /home/admin/.ssh/id_rsa)\""]
