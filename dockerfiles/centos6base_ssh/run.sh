@@ -19,4 +19,4 @@ echo "Creating container $CONTAINER_NAME ..."
 echo "SSH server listening on localhost:$SSH_PORT"
 echo "To stop the container: docker rm -f $CONTAINER_NAME"
 
-docker run --rm -p $SSH_PORT:22 --name $CONTAINER_NAME $IMAGE_NAME
+docker run --rm -d -p $SSH_PORT:22 --name $CONTAINER_NAME $IMAGE_NAME
