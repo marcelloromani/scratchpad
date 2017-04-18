@@ -30,8 +30,11 @@ RUN chmod 600 .ssh/id_rsa
 RUN chmod 644 .ssh/id_rsa.pub
 RUN chmod 644 .ssh/authorized_keys
 
+COPY files/show_credentials.sh .
+RUN chmod 755 show_credentials.sh
+
 USER admin
 
 EXPOSE 22
 
-CMD ["/bin/bash", "-c", "echo -e \"SSH credentials:\nusername: admin\npassword: admin\nPrivate key:\n$(cat /home/admin/.ssh/id_rsa)\""]
+CMD ["./show_credentials.sh"]
