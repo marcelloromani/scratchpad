@@ -14,7 +14,7 @@ from argparse import ArgumentParser
 from email.mime.text import MIMEText
 
 
-def optSetup():
+def opt_setup():
     parser = ArgumentParser()
 
     parser.add_argument("file",
@@ -39,7 +39,7 @@ def optSetup():
     return parser
 
 
-def logSetup(logLevel):
+def log_setup(logLevel):
     rootLogger = logging.getLogger()
     rootLogger.setLevel(logLevel)
 
@@ -93,9 +93,9 @@ def send_email(friend_from, friend_to):
 
 
 def main():
-    parser = optSetup()
+    parser = opt_setup()
     args = parser.parse_args()
-    logSetup(logging.getLevelName(args.log_level))
+    log_setup(logging.getLevelName(args.log_level))
 
     logger = logging.getLogger("main")
 
