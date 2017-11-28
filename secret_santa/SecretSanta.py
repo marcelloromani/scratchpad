@@ -81,7 +81,7 @@ def send_email(friend_from, friend_to):
     logger = logging.getLogger("notify_match")
 
     msg = MIMEText("Ho ho ho!\nThis is a Secret (Soup) Santa announcement!\n\n%s, your lucky one is %s!\n\nHo ho ho!\nSanta" % (friend_from['name'], friend_to['name']))
-    msg['Subject'] = 'Secret Santa annoucement'
+    msg['Subject'] = 'Secret Santa announcement'
     msg['From'] = 'Santa'
     msg['To'] = friend_from['name']
 
