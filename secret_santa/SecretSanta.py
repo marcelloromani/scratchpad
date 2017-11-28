@@ -56,6 +56,7 @@ def yaml_loadfile(filename):
 
     return conf
 
+
 def email_login(smtp_auth_file):
     global smtp
 
@@ -138,6 +139,7 @@ def main():
 
         logger.info("SMTP logout")
         email_logout()
+
 
 if __name__ == "__main__":
     main()
