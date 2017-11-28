@@ -9,7 +9,6 @@ import sys
 import logging
 import yaml
 import random
-import os
 import smtplib
 from argparse import ArgumentParser
 from email.mime.text import MIMEText
