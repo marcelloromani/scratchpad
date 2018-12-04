@@ -96,6 +96,8 @@ def send_email(friend_from, friend_to):
 
 
 def main():
+    random.seed()
+
     parser = opt_setup()
     args = parser.parse_args()
     log_setup(logging.getLevelName(args.log_level))
