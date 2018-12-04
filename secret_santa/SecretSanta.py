@@ -17,23 +17,27 @@ def opt_setup():
     parser = ArgumentParser()
 
     parser.add_argument("file",
-            type=str,
-            help="List of friends' e-mails (yaml format)")
+        type=str,
+        help="List of friends' e-mails (yaml format)"
+    )
 
     parser.add_argument("--log-level",
-            type=str,
-            choices=["DEBUG", "INFO", "ERROR"],
-            default="INFO",
-            help="Set log level")
+        type=str,
+        choices=["DEBUG", "INFO", "ERROR"],
+        default="INFO",
+        help="Set log level"
+    )
 
     parser.add_argument("--really-send",
-            action = "store_true",
-            help = "Send e-mail for real")
+        action = "store_true",
+        help = "Send e-mail for real"
+    )
 
     parser.add_argument("--smtp-cfg",
-            type = str,
-            default = "smtp.yml",
-            help = "SMTP credentials (yaml format)")
+        type = str,
+        default = "smtp.yml",
+        help = "SMTP credentials (yaml format)"
+    )
 
     return parser
 
