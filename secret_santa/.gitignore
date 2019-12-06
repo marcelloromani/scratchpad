@@ -1,0 +1,5 @@
+.git
+config/*.yaml
+!config/*example*yaml
+**/.idea
+venv

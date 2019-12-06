@@ -1,3 +1,0 @@
-smtp_user: me@example.com
-smtp_pass: my_secret_password
-smtp_ssl_host: smtp.gmail.com:465
