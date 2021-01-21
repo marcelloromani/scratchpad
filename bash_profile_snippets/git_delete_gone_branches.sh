@@ -1,4 +1,4 @@
-delete_gone_branches() {
+git_delete_gone_branches() {
     actually_delete="$1"
     git fetch -p
     branches=$(git branch -av | grep gone | awk '{ print $1 }')
