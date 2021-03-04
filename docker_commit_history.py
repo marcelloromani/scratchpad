@@ -35,8 +35,8 @@ def print_commit(image_id):
     """
     Print info about the specified image commit; return the parent image id, if any
     """
-    # todo check whether "sudo" is needed or not on the system
-    json_obj = json.loads(subprocess.check_output(["sudo", "docker", "inspect", image_id]))
+    # FIXME check whether "sudo" is needed or not on the system
+    json_obj = json.loads(subprocess.check_output(["docker", "inspect", image_id]))
 
     image_id  = json_obj[0]["Id"]
     if ':' in image_id:
@@ -45,13 +45,13 @@ def print_commit(image_id):
     parent_id = json_obj[0]["Parent"]
     author    = json_obj[0]["Author"]
 
-    print "%s \"%s\" \"%s\"" % (image_id[0:11], author, comment)
+    print("%s \"%s\" \"%s\"" % (image_id[0:11], author, comment))
 
     return parent_id
 
 
 def print_usage():
-    print "Usage: docker_log.py <image id>"
+    print("Usage: docker_log.py <image id>")
 
 
 def main():
