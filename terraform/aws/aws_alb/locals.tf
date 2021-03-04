@@ -2,8 +2,8 @@ locals {
   name_prefix = var.project
 
   tags = {
-    ManagedBy = "terraform"
+    ManagedBy        = "terraform"
     TerraformVersion = "0.14.7"
-    Project = var.project
+    Project          = var.project
   }
 }

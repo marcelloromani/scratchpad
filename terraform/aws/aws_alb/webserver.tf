@@ -20,9 +20,9 @@ data "aws_ami" "amazon_linux_2" {
 
 
 resource "aws_security_group" "webserver" {
-  name = "${local.name_prefix}-webserver"
+  name        = "${local.name_prefix}-webserver"
   description = "Allow HTTP and SSH from everywhere"
-  vpc_id = module.vpc.vpc_id
+  vpc_id      = module.vpc.vpc_id
 
   ingress {
     description = "HTTP from everywhere"
@@ -65,7 +65,7 @@ resource "aws_instance" "webserver" {
   ami                    = data.aws_ami.amazon_linux_2.id
   instance_type          = var.webserver_instance_type
   key_name               = var.key_name
-  vpc_security_group_ids = [ aws_security_group.webserver.id ]
+  vpc_security_group_ids = [aws_security_group.webserver.id]
   subnet_id              = module.vpc.public_subnets[0]
   user_data              = data.template_file.webserver_init.rendered
 
