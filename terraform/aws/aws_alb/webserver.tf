@@ -66,7 +66,7 @@ resource "aws_instance" "webserver" {
   instance_type          = var.webserver_instance_type
   key_name               = var.key_name
   vpc_security_group_ids = [aws_security_group.webserver.id]
-  subnet_id              = module.vpc.public_subnets[0]
+  subnet_id              = module.vpc.public_subnets[count.index % length(module.vpc.public_subnets)]
   user_data              = data.template_file.webserver_init.rendered
 
   tags = merge(

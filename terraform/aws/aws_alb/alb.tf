@@ -29,7 +29,8 @@ resource "aws_alb_target_group" "webserver" {
 
 
 resource "aws_alb_target_group_attachment" "webserver" {
-  target_id        = aws_instance.webserver[0].id
+  count            = var.webserver_count
+  target_id        = aws_instance.webserver[count.index].id
   target_group_arn = aws_alb_target_group.webserver.arn
 }
 
