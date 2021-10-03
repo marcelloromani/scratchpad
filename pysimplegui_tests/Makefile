@@ -18,5 +18,5 @@ macos:
 	brew install tcl-tk
 	brew install python-tk
 
-run:
-	. venv/bin/activate && python main.py
+run-simplest-window:
+	. venv/bin/activate && python simplest-window.py
