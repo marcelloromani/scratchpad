@@ -21,5 +21,8 @@ macos:
 run-empty-window:
 	. venv/bin/activate && python empty-window.py
 
+run-login-form:
+	. venv/bin/activate && python login-form.py
+
 run-pattern-1a:
 	. venv/bin/activate && python pattern-1a.py
