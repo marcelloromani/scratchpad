@@ -1,11 +1,11 @@
 def decode_line(line: str) -> dict:
-    r = {}
+    result = {}
     for field in line.split():
-        k, v = field.split(":")
-        if v.isnumeric():
-            v = int(v)
-        r[k] = v
-    return r
+        key, value = field.split(":")
+        if value.isnumeric():
+            value = int(value)
+        result[key] = value
+    return result
 
 
 def read_passports_from_file(filename) -> list:
