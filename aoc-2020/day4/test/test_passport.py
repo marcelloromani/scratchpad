@@ -52,10 +52,11 @@ class PassportValidationTests(unittest.TestCase):
             },
         ]
         for t in test_cases:
-            expected = t["valid"]
-            passport = decode_line(t["data"])
-            actual = has_required_fields(passport)
-            self.assertEqual(expected, actual)
+            with self.subTest(passport=t["data"]):
+                expected = t["valid"]
+                passport = decode_line(t["data"])
+                actual = has_required_fields(passport)
+                self.assertEqual(expected, actual)
 
 
 if __name__ == '__main__':
