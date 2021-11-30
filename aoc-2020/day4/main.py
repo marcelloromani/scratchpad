@@ -1,3 +1,6 @@
+REQUIRED_FIELDS = ['byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid']
+
+
 def decode_line(line: str) -> dict:
     result = {}
     for field in line.split():
@@ -25,3 +28,10 @@ def read_passports_from_file(filename) -> list:
     if passport != {}:
         passports.append(passport)
     return passports
+
+
+def has_required_fields(passport: dict) -> bool:
+    for key in REQUIRED_FIELDS:
+        if key not in passport:
+            return False
+    return True
