@@ -1,6 +1,6 @@
 import unittest
 
-from main import count_increases
+from main import count_increases, parse_int_array
 
 
 class SonarSweepTest(unittest.TestCase):
@@ -32,6 +32,34 @@ class SonarSweepTest(unittest.TestCase):
             expected = t["expected"]
             actual = count_increases(t["data"])
             self.assertEqual(expected, actual, t["data"])
+
+    def test_read_array(self):
+        test_cases = [
+            {
+                "data": [],
+                "expected": [],
+            },
+            {
+                "data": ["10"],
+                "expected": [10],
+            },
+            {
+                "data": ["10\n"],
+                "expected": [10],
+            },
+            {
+                "data": [" 10 \n"],
+                "expected": [10],
+            },
+            {
+                "data": [" 10", "\n15"],
+                "expected": [10, 15],
+            },
+        ]
+        for t in test_cases:
+            expected = t["expected"]
+            actual = parse_int_array(t["data"])
+            self.assertListEqual(expected, actual, t["data"])
 
 
 if __name__ == '__main__':
