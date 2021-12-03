@@ -1,11 +1,11 @@
 import unittest
 
-from main import count_increases, parse_int_array
+from main import count_increases, parse_int_array, count_triplet_increases, _sum_of_triplets
 
 
-class SonarSweepTest(unittest.TestCase):
+class SonarSweepTestPart1(unittest.TestCase):
 
-    def test_increase_count_empty(self):
+    def test_increase_count(self):
         tests_cases = [
             {
                 "data": [],
@@ -60,6 +60,37 @@ class SonarSweepTest(unittest.TestCase):
             expected = t["expected"]
             actual = parse_int_array(t["data"])
             self.assertListEqual(expected, actual, t["data"])
+
+
+class SonarSweepTestPart2(unittest.TestCase):
+
+    def test_sum_triplets(self):
+        test_cases = [
+            {
+                "data": [1, 2, 3],
+                "expected": [6],
+            },
+            {
+                "data": [1, 2, 3, 4],
+                "expected": [6, 9],
+            },
+        ]
+        for t in test_cases:
+            expected = t["expected"]
+            actual = _sum_of_triplets(t["data"])
+            self.assertListEqual(expected, actual, t["data"])
+
+    def test_count_increments_triplets(self):
+        test_cases = [
+            {
+                "data": [199, 200, 208, 210, 200, 207, 240, 269, 260, 263],
+                "expected": 5,
+            },
+        ]
+        for t in test_cases:
+            expected = t["expected"]
+            actual = count_triplet_increases(t["data"])
+            self.assertEqual(expected, actual, t["data"])
 
 
 if __name__ == '__main__':
