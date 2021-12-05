@@ -51,13 +51,21 @@ class Move:
     def __str__(self):
         return json.dumps(dict(self))
 
-    def next_pos(self, hor: int, depth: int) -> (int, int):
+    def next_pos(self, hor: int, depth: int, aim: int) -> (int, int, int):
+        """
+        calculates the next position of the submarine
+        after the move is executed
+        :param hor: current horizontal position
+        :param depth: current depth
+        :param aim: current aim
+        :return: 3-item tuple: (new hor. pos., new depth, new aim)
+        """
         if self.direction == "forward":
-            return hor + self.distance, depth
+            return hor + self.distance, depth + aim * self.distance, aim
         if self.direction == "down":
-            return hor, depth + self.distance
+            return hor, depth, aim + self.distance
         if self.direction == "up":
-            return hor, depth - self.distance
+            return hor, depth, aim - self.distance
 
 
 def parse_moves(moves_str: list[str]) -> list[Move]:
@@ -74,8 +82,9 @@ def parse_moves(moves_str: list[str]) -> list[Move]:
 def multiply_hor_depth(moves: list[Move]) -> int:
     hor = 0
     depth = 0
+    aim = 0
     for m in moves:
-        hor, depth = m.next_pos(hor, depth)
+        hor, depth, aim = m.next_pos(hor, depth, aim)
     return hor * depth
 
 
