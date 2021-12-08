@@ -29,13 +29,23 @@ def most_common_bits(data: list[str]) -> str:
     return "".join([str(x) for x in result])
 
 
+def reverse_bits(s: str) -> str:
+    return "".join([('1' if x == '0' else '0') for x in s])
+
+
+def gamma_epsilon_rate(data: list[str]) -> (int, int):
+    gamma_str = most_common_bits(data)
+    epsilon_str = reverse_bits(gamma_str)
+    return int(gamma_str, 2), int(epsilon_str, 2)
+
+
 def main():
     lines = stdin.readlines()
 
     lines = list(purge_blanks(lines))
 
-    result_str = most_common_bits(lines)
-    print(int(result_str, 2))
+    gamma, epsilon = gamma_epsilon_rate(lines)
+    print(gamma * epsilon)
 
 
 if __name__ == "__main__":
