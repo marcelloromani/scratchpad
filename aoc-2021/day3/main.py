@@ -39,6 +39,10 @@ def gamma_epsilon_rate(data: list[str]) -> (int, int):
     return int(gamma_str, 2), int(epsilon_str, 2)
 
 
+def oxygen_co2_rate(dat: list[str]) -> (int, int):
+    return 0, 0
+
+
 def main():
     lines = stdin.readlines()
 
