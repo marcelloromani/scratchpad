@@ -96,6 +96,9 @@ def main():
     gamma, epsilon = gamma_epsilon_rate(lines)
     print(gamma * epsilon)
 
+    ox, co2 = oxygen_co2_rate(lines)
+    print(ox * co2)
+
 
 if __name__ == "__main__":
     main()
