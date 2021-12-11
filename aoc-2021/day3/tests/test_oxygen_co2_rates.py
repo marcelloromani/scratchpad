@@ -1,6 +1,6 @@
 import unittest
 
-from main import oxygen_co2_rate, bit_count_in_position, BitSelectionPolicy, filter_data
+from main import oxygen_co2_rate, bit_count_in_position, BitSelectionPolicy, filter_data, filter_data_single
 
 
 class TestOxygenCO2(unittest.TestCase):
@@ -10,12 +10,12 @@ class TestOxygenCO2(unittest.TestCase):
             {
                 "data": ["00", "01", "11"],
                 "position": 0,
-                "expected": (1, 2),
+                "expected": (2, 1),
             },
             {
                 "data": ["00", "01", "11"],
                 "position": 1,
-                "expected": (2, 1),
+                "expected": (1, 2),
             },
         ]
         for t in test_cases:
@@ -28,42 +28,59 @@ class TestOxygenCO2(unittest.TestCase):
                 "data": ["00", "10", "11"],
                 "position": 1,
                 "policy": BitSelectionPolicy.MOST_COMMON,
-                "expected": ["10", "11"],
+                "expected": ["00", "10"],
             },
             {
                 "data": ["00", "10", "11"],
                 "position": 1,
                 "policy": BitSelectionPolicy.LEAST_COMMON,
-                "expected": ["00"],
+                "expected": ["11"],
             },
             {
                 "data": ["00", "10", "11"],
                 "position": 0,
                 "policy": BitSelectionPolicy.MOST_COMMON,
-                "expected": ["00", "10"],
+                "expected": ["10", "11"],
             },
             {
                 "data": ["00", "10", "11"],
                 "position": 0,
                 "policy": BitSelectionPolicy.LEAST_COMMON,
-                "expected": ["11"],
+                "expected": ["00"],
             },
             {
                 "data": ["10", "11", "01"],
                 "position": 0,
                 "policy": BitSelectionPolicy.LEAST_COMMON,
-                "expected": ["10"],
+                "expected": ["01"],
             },
             {
                 "data": ["10", "11", "01"],
                 "position": 1,
                 "policy": BitSelectionPolicy.LEAST_COMMON,
-                "expected": ["01"],
+                "expected": ["10"],
             },
         ]
         for t in test_cases:
             actual = filter_data(t["data"], t["position"], t["policy"])
             self.assertListEqual(t["expected"], actual, t["data"])
+
+    def test_filter_data_single(self):
+        test_cases = [
+            {
+                "data": ["00", "01", "10", "11"],
+                "policy": BitSelectionPolicy.MOST_COMMON,
+                "expected": 3,
+            },
+            {
+                "data": ["00", "01", "10", "11"],
+                "policy": BitSelectionPolicy.LEAST_COMMON,
+                "expected": 0,
+            },
+        ]
+        for t in test_cases:
+            actual = filter_data_single(t["data"], t["policy"])
+            self.assertEqual(t["expected"], actual, t["data"])
 
     def test_oxygen_co2_rates(self):
         test_cases = [

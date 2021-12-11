@@ -42,9 +42,8 @@ def gamma_epsilon_rate(data: list[str]) -> (int, int):
 def bit_count_in_position(data: list[str], bit_position: int) -> (int, int):
     """Returns the number of 0 and 1 in the specified position"""
     bit_count = [0, 0]  # number of '0's, number of '1's
-    str_index = bit_pos_to_str_index(data, bit_position)
     for d in data:
-        if d[str_index] == '0':
+        if d[bit_position] == '0':
             bit_count[0] += 1
         else:
             bit_count[1] += 1
@@ -56,50 +55,35 @@ class BitSelectionPolicy:
     LEAST_COMMON: int = 1
 
 
-def bit_pos_to_str_index(data: list[str], bit_position: int) -> int:
-    """
-    Convert bit position (right-based) to position in the strinc (left-based)
-    :param data: list of strings representing binary numbers
-    :param bit_position: position to convert. Example: 0 => last char of the string
-    """
-    if len(data) == 0:
-        raise ValueError("No data")
-    data_width = len(data[0])
-    return data_width - bit_position - 1
-
-
 def filter_data(data: list[str], bit_position: int, bit_selection_policy: int) -> list[str]:
     result = []
-    char_position = bit_pos_to_str_index(data, bit_position)
     zero_count, one_count = bit_count_in_position(data, bit_position)
     for d in data:
         if bit_selection_policy == BitSelectionPolicy.MOST_COMMON:
-            if zero_count > one_count and d[char_position] == '0':
+            if zero_count > one_count and d[bit_position] == '0':
                 result.append(d)
-            elif one_count >= zero_count and d[char_position] == '1':
+            elif one_count >= zero_count and d[bit_position] == '1':
                 result.append(d)
         elif bit_selection_policy == BitSelectionPolicy.LEAST_COMMON:
-            if zero_count > one_count and d[char_position] == '1':
+            if zero_count > one_count and d[bit_position] == '1':
                 result.append(d)
-            elif one_count >= zero_count and d[char_position] == '0':
+            elif one_count >= zero_count and d[bit_position] == '0':
                 result.append(d)
     return result
 
 
-def oxygen_co2_rate(data: list[str]) -> (int, int):
+def filter_data_single(data: list[str], bit_selection_policy: int) -> int:
     d = data
     pos = 0
     while len(d) > 1:
-        d = filter_data(d, pos, BitSelectionPolicy.MOST_COMMON)
+        d = filter_data(d, pos, bit_selection_policy)
         pos += 1
-    ox_rate = int(d[0], 2)
+    return int(d[0], 2)
 
-    d = data
-    pos = 0
-    while len(d) > 1:
-        d = filter_data(d, pos, BitSelectionPolicy.LEAST_COMMON)
-        pos += 1
-    co2_rate = int(d[0], 2)
+
+def oxygen_co2_rate(data: list[str]) -> (int, int):
+    ox_rate = filter_data_single(data, BitSelectionPolicy.MOST_COMMON)
+    co2_rate = filter_data_single(data, BitSelectionPolicy.LEAST_COMMON)
 
     return ox_rate, co2_rate
 
