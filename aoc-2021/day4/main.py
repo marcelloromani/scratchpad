@@ -50,12 +50,20 @@ def read_input(filename: str) -> (list[int], list[list[list[int]]]):
                     # finished reading a board
                     board = parse_board(board_txt)
                     boards.append(board)
+                    board_txt = ""          # signal that the board has been parsed and added to the result
                     state = WAITING_FOR_BOARDS
                 else:
                     # still reading the board
+                    board_txt += '\n'       # need new line to separate lines
                     board_txt += line
             else:
                 raise ValueError("Unknown state")
+
+    # if the file doesn't end with a new line, we'll miss the last board
+    # so, if board_txt is not empty, it means the last board hasn't been parsed
+    if board_txt != "":
+        board = parse_board(board_txt)
+        boards.append(board)
 
     return numbers, boards
 
