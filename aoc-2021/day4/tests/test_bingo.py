@@ -89,8 +89,24 @@ class TestInput(unittest.TestCase):
         ]
         self.assertListEqual(board, parse_board(board_txt))
 
-    def test_read_input(self):
+    def test_read_input_00(self):
         file = "input_00.txt"
+        numbers = [7, 4, 9]
+        boards = [
+            [
+                [22, 13, 17, 11, 0],
+                [8, 2, 23, 4, 24],
+                [21, 9, 14, 16, 7],
+                [6, 10, 3, 18, 5],
+                [1, 12, 20, 15, 19],
+            ]
+        ]
+        n, b = read_input(file)
+        self.assertListEqual(numbers, n)
+        self.assertListEqual(boards, b)
+
+    def test_read_input_01(self):
+        file = "input_01.txt"
         numbers = [7, 4, 9]
         boards = [
             [
