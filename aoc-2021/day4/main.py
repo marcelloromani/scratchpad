@@ -125,12 +125,21 @@ def sum_unmarked_nums(board: list[list[int]], numbers: list[int]) -> int:
     return sum_of_unmarked
 
 
+def day4_part1(boards, numbers) -> int:
+    winning_board, drawn_nums = find_winning_board(boards, numbers)
+    last_drawn = drawn_nums[-1]
+    sum_of_unmarked = sum_unmarked_nums(winning_board, numbers)
+    return last_drawn * sum_of_unmarked
+
+
 def main():
     nums, boards = read_input(stdin)
 
-    print(nums)
+    # debug
+    # print(nums)
+    # print(boards)
 
-    print(boards)
+    print(day4_part1(boards, nums))
 
 
 if __name__ == "__main__":

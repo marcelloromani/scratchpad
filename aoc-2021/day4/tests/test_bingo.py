@@ -1,6 +1,7 @@
 import unittest
 
-from main import num_pos_in_board, is_winning_board, parse_board, read_input, find_winning_board, sum_unmarked_nums
+from main import num_pos_in_board, is_winning_board, parse_board, read_input, find_winning_board, sum_unmarked_nums, \
+    day4_part1
 
 
 class TestBoard(unittest.TestCase):
@@ -168,6 +169,14 @@ class TestBoard(unittest.TestCase):
         for t in test_cases:
             actual = sum_unmarked_nums(board, t["nums"])
             self.assertEqual(t["sum"], actual, t["nums"])
+
+    def test_day4_part1(self):
+        file = "sample_input.txt"
+        with open(file, "r") as f:
+            numbers, boards = read_input(f)
+            actual = day4_part1(boards, numbers)
+            expected = 4512
+            self.assertEqual(expected, actual)
 
 
 class TestInput(unittest.TestCase):
