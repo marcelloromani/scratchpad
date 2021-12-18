@@ -35,7 +35,7 @@ class TestBoard(unittest.TestCase):
         for t in test_cases:
             self.assertEqual(t["pos"], num_pos_in_board(board, t["n"]), t["n"])
 
-    def test_is_board_winning(self):
+    def test_is_board_winning_2x2(self):
         board = [
             [1, 2],
             [3, 4],
@@ -44,30 +44,53 @@ class TestBoard(unittest.TestCase):
             {
                 "nums": [1, 2],
                 "win": True,
+                "last_num": 2,
             },
             {
                 "nums": [3, 4],
                 "win": True,
+                "last_num": 4,
             },
             {
                 "nums": [1, 3],
                 "win": True,
+                "last_num": 3,
             },
             {
                 "nums": [2, 4],
                 "win": True,
+                "last_num": 4,
             },
             {
                 "nums": [1, 4],
                 "win": False,
+                "last_num": None,
             },
             {
                 "nums": [2, 3],
                 "win": False,
+                "last_num": None,
+            },
+            {
+                "nums": [2, 3, 4, 5],
+                "win": True,
+                "last_num": 4,
+            },
+            {
+                "nums": [1, 2, 3, 4],
+                "win": True,
+                "last_num": 2,
+            },
+            {
+                "nums": [1, 2, 7, 8],
+                "win": True,
+                "last_num": 2,
             },
         ]
         for t in test_cases:
-            self.assertEqual(t["win"], is_winning_board(board, t["nums"]), t["nums"])
+            is_winning, number_when_won = is_winning_board(board, t["nums"])
+            self.assertEqual(t["win"], is_winning, t["nums"])
+            self.assertEqual(t["last_num"], number_when_won, t["nums"])
 
 
 class TestInput(unittest.TestCase):

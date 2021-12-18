@@ -76,7 +76,7 @@ def num_pos_in_board(board: list[list[int]], n: int) -> (int, int):
     return -1, -1
 
 
-def is_winning_board(board: list[list[int]], numbers: list[int]) -> bool:
+def is_winning_board(board: list[list[int]], numbers: list[int]) -> (bool, int):
     row_count = len(board)
     col_count = len(board[0])
     # these array count how many times each row is found having a matching number
@@ -88,13 +88,13 @@ def is_winning_board(board: list[list[int]], numbers: list[int]) -> bool:
         if row != -1 and col != -1:
             row_match_count[row] += 1
             col_match_count[col] += 1
-    for r in row_match_count:
-        if r == col_count:
-            return True
-    for c in col_match_count:
-        if c == row_count:
-            return True
-    return False
+        for r in row_match_count:
+            if r == col_count:
+                return True, n
+        for c in col_match_count:
+            if c == row_count:
+                return True, n
+    return False, None
 
 
 def main():
