@@ -265,6 +265,9 @@ class TestBoard(unittest.TestCase):
             actual = sum_unmarked_nums(board, t["nums"])
             self.assertEqual(t["sum"], actual, t["nums"])
 
+
+class TestSampleInput(unittest.TestCase):
+
     def test_day4_part1(self):
         file = "sample_input.txt"
         with open(file, "r") as f:
@@ -272,6 +275,32 @@ class TestBoard(unittest.TestCase):
             actual = day4_part1(boards, numbers)
             expected = 4512
             self.assertEqual(expected, actual)
+
+    def test_is_winning_board(self):
+        file = "sample_input.txt"
+        with open(file, "r") as f:
+            numbers, boards = read_input(f)
+
+            is_winning, drawn = is_winning_board(boards[0], numbers)
+            self.assertFalse(is_winning, 'board0')
+            self.assertListEqual(numbers, drawn, 'board0')
+
+            is_winning, drawn = is_winning_board(boards[1], numbers)
+            self.assertFalse(is_winning, 'board1')
+            self.assertListEqual(numbers, drawn, 'board1')
+
+            is_winning, drawn = is_winning_board(boards[2], numbers)
+            self.assertFalse(is_winning, 'board2')
+            expected_drawn = [7, 4, 9, 5, 11, 17, 23, 2, 0, 14, 21, 24]
+            self.assertListEqual(expected_drawn, drawn, 'board2')
+
+    def test_winning_board(self):
+        file = "sample_input.txt"
+        with open(file, "r") as f:
+            numbers, boards = read_input(f)
+            winning_board, drawn_nums = find_winning_board(boards, numbers)
+            expected_drawn = [7, 4, 9, 5, 11, 17, 23, 2, 0, 14, 21, 24]
+            self.assertListEqual(expected_drawn, drawn_nums)
 
 
 if __name__ == '__main__':
