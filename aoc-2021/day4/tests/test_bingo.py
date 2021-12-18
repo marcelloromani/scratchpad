@@ -1,6 +1,6 @@
 import unittest
 
-from main import num_pos_in_board, is_winning_board, parse_board, read_input
+from main import num_pos_in_board, is_winning_board, parse_board, read_input, find_winning_board
 
 
 class TestBoard(unittest.TestCase):
@@ -90,6 +90,48 @@ class TestBoard(unittest.TestCase):
         for t in test_cases:
             is_winning, number_when_won = is_winning_board(board, t["nums"])
             self.assertEqual(t["win"], is_winning, t["nums"])
+            self.assertEqual(t["last_num"], number_when_won, t["nums"])
+
+    def test_find_winning_board(self):
+        board0 = [
+            [1, 2],
+            [3, 4],
+        ]
+        board1 = [
+            [5, 6],
+            [7, 8],
+        ]
+        boards = [board0, board1]
+        test_cases = [
+            {
+                "nums": [1, 2],
+                "winning": board0,
+                "last_num": 2,
+            },
+            {
+                "nums": [6, 8],
+                "winning": board1,
+                "last_num": 8,
+            },
+            {
+                "nums": [9, 9, 1, 2],
+                "winning": board0,
+                "last_num": 2,
+            },
+            {
+                "nums": [9, 9, 5, 7],
+                "winning": board1,
+                "last_num": 7,
+            },
+            {
+                "nums": [5, 8, 2, 9, 7, 22],
+                "winning": board1,
+                "last_num": 7,
+            },
+        ]
+        for t in test_cases:
+            winning_board, number_when_won = find_winning_board(boards, t["nums"])
+            self.assertListEqual(t["winning"], winning_board, t["nums"])
             self.assertEqual(t["last_num"], number_when_won, t["nums"])
 
 

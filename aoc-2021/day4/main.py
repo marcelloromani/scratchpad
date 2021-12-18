@@ -98,6 +98,18 @@ def is_winning_board(board: list[list[int]], numbers: list[int]) -> (bool, int):
     return False, None
 
 
+def find_winning_board(boards: list[list[list[int]]], numbers: list[int]) -> (list[list[int]], int):
+    """
+    :param boards: list of 2d boards to check
+    :param numbers: numbers drawn
+    :return: the board that won, the number drawn when a board won
+    """
+    for board in boards:
+        is_winning, number_when_won = is_winning_board(board, numbers)
+        if is_winning:
+            return board, number_when_won
+
+
 def main():
     nums, boards = read_input(stdin)
 
