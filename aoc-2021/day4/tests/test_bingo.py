@@ -1,6 +1,6 @@
 import unittest
 
-from main import num_pos_in_board, is_winning_board, parse_board, read_input, find_winning_board, sum_unmarked_nums, \
+from main import num_pos_in_board, is_winning_board, parse_board, read_input, find_first_winning_board, sum_unmarked_nums, \
     day4_part1
 
 
@@ -193,7 +193,7 @@ class TestBoard(unittest.TestCase):
             self.assertEqual(t["win"], is_winning, t["nums"])
             self.assertListEqual(t["drawn"], drawn_nums, t["nums"])
 
-    def test_find_winning_board(self):
+    def test_find_first_winning_board(self):
         board0 = [
             [1, 2],
             [3, 4],
@@ -215,23 +215,13 @@ class TestBoard(unittest.TestCase):
                 "drawn": [6, 8],
             },
             {
-                "nums": [9, 9, 1, 2],
-                "winning": board0,
-                "drawn": [9, 9, 1, 2],
-            },
-            {
-                "nums": [9, 9, 5, 7],
+                "nums": [1, 5, 6, 2],
                 "winning": board1,
-                "drawn": [9, 9, 5, 7],
-            },
-            {
-                "nums": [5, 8, 2, 9, 7, 22],
-                "winning": board1,
-                "drawn": [5, 8, 2, 9, 7],
+                "drawn": [1, 5, 6],
             },
         ]
         for t in test_cases:
-            winning_board, drawn_nums = find_winning_board(boards, t["nums"])
+            winning_board, drawn_nums = find_first_winning_board(boards, t["nums"])
             self.assertListEqual(t["winning"], winning_board, t["nums"])
             self.assertListEqual(t["drawn"], drawn_nums, t["nums"])
 
@@ -301,11 +291,11 @@ class TestSampleInput(unittest.TestCase):
             expected_drawn = [7, 4, 9, 5, 11, 17, 23, 2, 0, 14, 21, 24]
             self.assertListEqual(expected_drawn, drawn, 'board2')
 
-    def test_winning_board(self):
+    def test_first_winning_board(self):
         file = "sample_input.txt"
         with open(file, "r") as f:
             numbers, boards = read_input(f)
-            winning_board, drawn_nums = find_winning_board(boards, numbers)
+            winning_board, drawn_nums = find_first_winning_board(boards, numbers)
             expected_drawn = [7, 4, 9, 5, 11, 17, 23, 2, 0, 14, 21, 24]
             self.assertListEqual(expected_drawn, drawn_nums)
 
