@@ -76,14 +76,18 @@ def num_pos_in_board(board: list[list[int]], n: int) -> (int, int):
     return -1, -1
 
 
-def is_winning_board(board: list[list[int]], numbers: list[int]) -> (bool, int):
+def is_winning_board(board: list[list[int]], numbers: list[int]) -> (bool, list[int]):
     row_count = len(board)
     col_count = len(board[0])
     # these array count how many times each row is found having a matching number
     row_match_count = [0 for _ in range(row_count)]
     col_match_count = [0 for _ in range(col_count)]
+
+    drawn = []
+
     # look for all numbers in the board
     for n in numbers:
+        drawn.append(n)
         row, col = num_pos_in_board(board, n)
         if row != -1 and col != -1:
             row_match_count[row] += 1
@@ -91,11 +95,11 @@ def is_winning_board(board: list[list[int]], numbers: list[int]) -> (bool, int):
         # After each number we check if the board is winning
         for r in row_match_count:
             if r == col_count:
-                return True, n
+                return True, drawn
         for c in col_match_count:
             if c == row_count:
-                return True, n
-    return False, None
+                return True, drawn
+    return False, drawn
 
 
 def find_winning_board(boards: list[list[list[int]]], numbers: list[int]) -> (list[list[int]], int):
@@ -105,9 +109,9 @@ def find_winning_board(boards: list[list[list[int]]], numbers: list[int]) -> (li
     :return: the board that won, the number drawn when a board won
     """
     for board in boards:
-        is_winning, number_when_won = is_winning_board(board, numbers)
+        is_winning, drawn = is_winning_board(board, numbers)
         if is_winning:
-            return board, number_when_won
+            return board, drawn
 
 
 def main():
