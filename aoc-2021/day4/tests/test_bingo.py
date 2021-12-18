@@ -133,19 +133,24 @@ class TestBoard(unittest.TestCase):
 
     def test_is_board_winning_2x2(self):
         board = [
-            [1, 2],
-            [3, 4],
+            [0, 1],
+            [2, 3],
         ]
         test_cases = [
             {
-                "nums": [1, 2],
+                "nums": [0, 1],
                 "win": True,
-                "drawn": [1, 2],
+                "drawn": [0, 1],
             },
             {
-                "nums": [3, 4],
+                "nums": [2, 3],
                 "win": True,
-                "drawn": [3, 4],
+                "drawn": [2, 3],
+            },
+            {
+                "nums": [0, 2],
+                "win": True,
+                "drawn": [0, 2],
             },
             {
                 "nums": [1, 3],
@@ -153,34 +158,29 @@ class TestBoard(unittest.TestCase):
                 "drawn": [1, 3],
             },
             {
-                "nums": [2, 4],
-                "win": True,
-                "drawn": [2, 4],
-            },
-            {
-                "nums": [1, 4],
+                "nums": [0, 3],
                 "win": False,
-                "drawn": [1, 4],
+                "drawn": [0, 3],
             },
             {
-                "nums": [2, 3],
+                "nums": [1, 2],
                 "win": False,
-                "drawn": [2, 3],
-            },
-            {
-                "nums": [2, 3, 4, 5],
-                "win": True,
-                "drawn": [2, 3, 4],
+                "drawn": [1, 2],
             },
             {
                 "nums": [1, 2, 3, 4],
                 "win": True,
-                "drawn": [1, 2],
+                "drawn": [1, 2, 3],
             },
             {
-                "nums": [1, 2, 7, 8],
+                "nums": [0, 1, 2, 3],
                 "win": True,
-                "drawn": [1, 2],
+                "drawn": [0, 1],
+            },
+            {
+                "nums": [0, 1, 6, 7],
+                "win": True,
+                "drawn": [0, 1],
             },
         ]
         for t in test_cases:
