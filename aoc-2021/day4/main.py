@@ -88,6 +88,7 @@ def is_winning_board(board: list[list[int]], numbers: list[int]) -> (bool, int):
         if row != -1 and col != -1:
             row_match_count[row] += 1
             col_match_count[col] += 1
+        # After each number we check if the board is winning
         for r in row_match_count:
             if r == col_count:
                 return True, n
