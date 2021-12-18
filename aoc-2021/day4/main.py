@@ -11,6 +11,13 @@ def parse_board(board_text: str) -> list[list[int]]:
     return b
 
 
+def parse_numbers_line(line: str) -> list[int]:
+    line = line.strip()
+    if len(line) == 0:
+        return []
+    return [int(x) for x in line.split(",")]
+
+
 def read_input(f) -> (list[int], list[list[list[int]]]):
     WAITING_FOR_NUMBERS: int = 1
     WAITING_FOR_BOARDS: int = 2
@@ -28,7 +35,7 @@ def read_input(f) -> (list[int], list[list[list[int]]]):
             if len(line) == 0:
                 continue
             else:
-                numbers = [int(x) for x in line.split(",")]
+                numbers = parse_numbers_line(line)
                 state = WAITING_FOR_BOARDS
         elif state == WAITING_FOR_BOARDS:
             if len(line) == 0:
@@ -41,11 +48,11 @@ def read_input(f) -> (list[int], list[list[list[int]]]):
                 # finished reading a board
                 board = parse_board(board_txt)
                 boards.append(board)
-                board_txt = ""          # signal that the board has been parsed and added to the result
+                board_txt = ""  # signal that the board has been parsed and added to the result
                 state = WAITING_FOR_BOARDS
             else:
                 # still reading the board
-                board_txt += '\n'       # need new line to separate lines
+                board_txt += '\n'  # need new line to separate lines
                 board_txt += line
         else:
             raise ValueError("Unknown state")
