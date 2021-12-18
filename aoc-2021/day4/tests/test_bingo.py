@@ -4,6 +4,101 @@ from main import num_pos_in_board, is_winning_board, parse_board, read_input, fi
     day4_part1
 
 
+class TestInput(unittest.TestCase):
+
+    def test_parse_board(self):
+        board_txt = """
+            22 13 17 11  0
+             8  2 23  4 24
+            21  9 14 16  7
+             6 10  3 18  5
+             1 12 20 15 19
+        """
+        board = [
+            [22, 13, 17, 11, 0],
+            [8, 2, 23, 4, 24],
+            [21, 9, 14, 16, 7],
+            [6, 10, 3, 18, 5],
+            [1, 12, 20, 15, 19],
+        ]
+        self.assertListEqual(board, parse_board(board_txt))
+
+    def test_read_input_00(self):
+        file = "input_00.txt"
+        numbers = [7, 4, 9]
+        boards = [
+            [
+                [22, 13, 17, 11, 0],
+                [8, 2, 23, 4, 24],
+                [21, 9, 14, 16, 7],
+                [6, 10, 3, 18, 5],
+                [1, 12, 20, 15, 19],
+            ]
+        ]
+        with open(file, "r") as f:
+            n, b = read_input(f)
+            self.assertListEqual(numbers, n)
+            self.assertListEqual(boards, b)
+
+    def test_read_input_01(self):
+        file = "input_01.txt"
+        numbers = [7, 4, 9]
+        boards = [
+            [
+                [22, 13, 17, 11, 0],
+                [8, 2, 23, 4, 24],
+                [21, 9, 14, 16, 7],
+                [6, 10, 3, 18, 5],
+                [1, 12, 20, 15, 19],
+            ]
+        ]
+        with open(file, "r") as f:
+            n, b = read_input(f)
+            self.assertListEqual(numbers, n)
+            self.assertListEqual(boards, b)
+
+    def test_read_input_02(self):
+        file = "input_02.txt"
+        numbers = [7, 4, 9]
+        boards = [
+            [
+                [22, 13, 17, 11, 0],
+                [8, 2, 23, 4, 24],
+                [21, 9, 14, 16, 7],
+                [6, 10, 3, 18, 5],
+                [1, 12, 20, 15, 19],
+            ],
+            [
+                [3, 15, 0, 2, 22],
+                [9, 18, 13, 17, 5],
+                [19, 8, 7, 25, 23],
+                [20, 11, 10, 24, 4],
+                [14, 21, 16, 12, 6],
+            ],
+        ]
+        with open(file, "r") as f:
+            n, b = read_input(f)
+            self.assertListEqual(numbers, n)
+            self.assertListEqual(boards, b)
+
+    def test_read_input_03(self):
+        file = "input_03.txt"
+        numbers = [7, 4, 9]
+        boards = [
+            [
+                [22, 13, 17, 11, 0],
+                [8, 2, 23, 4, 24],
+                [21, 9, 14, 16, 7],
+                [6, 10, 3, 18, 5],
+                [1, 12, 20, 15, 19],
+            ]
+        ]
+        with open(file, "r") as f:
+            n, b = read_input(f)
+            self.assertListEqual(numbers, n)
+            self.assertListEqual(boards, b)
+
+
 class TestBoard(unittest.TestCase):
 
     def test_get_num_position(self):
@@ -177,101 +272,6 @@ class TestBoard(unittest.TestCase):
             actual = day4_part1(boards, numbers)
             expected = 4512
             self.assertEqual(expected, actual)
-
-
-class TestInput(unittest.TestCase):
-
-    def test_parse_board(self):
-        board_txt = """
-            22 13 17 11  0
-             8  2 23  4 24
-            21  9 14 16  7
-             6 10  3 18  5
-             1 12 20 15 19
-        """
-        board = [
-            [22, 13, 17, 11, 0],
-            [8, 2, 23, 4, 24],
-            [21, 9, 14, 16, 7],
-            [6, 10, 3, 18, 5],
-            [1, 12, 20, 15, 19],
-        ]
-        self.assertListEqual(board, parse_board(board_txt))
-
-    def test_read_input_00(self):
-        file = "input_00.txt"
-        numbers = [7, 4, 9]
-        boards = [
-            [
-                [22, 13, 17, 11, 0],
-                [8, 2, 23, 4, 24],
-                [21, 9, 14, 16, 7],
-                [6, 10, 3, 18, 5],
-                [1, 12, 20, 15, 19],
-            ]
-        ]
-        with open(file, "r") as f:
-            n, b = read_input(f)
-            self.assertListEqual(numbers, n)
-            self.assertListEqual(boards, b)
-
-    def test_read_input_01(self):
-        file = "input_01.txt"
-        numbers = [7, 4, 9]
-        boards = [
-            [
-                [22, 13, 17, 11, 0],
-                [8, 2, 23, 4, 24],
-                [21, 9, 14, 16, 7],
-                [6, 10, 3, 18, 5],
-                [1, 12, 20, 15, 19],
-            ]
-        ]
-        with open(file, "r") as f:
-            n, b = read_input(f)
-            self.assertListEqual(numbers, n)
-            self.assertListEqual(boards, b)
-
-    def test_read_input_02(self):
-        file = "input_02.txt"
-        numbers = [7, 4, 9]
-        boards = [
-            [
-                [22, 13, 17, 11, 0],
-                [8, 2, 23, 4, 24],
-                [21, 9, 14, 16, 7],
-                [6, 10, 3, 18, 5],
-                [1, 12, 20, 15, 19],
-            ],
-            [
-                [3, 15, 0, 2, 22],
-                [9, 18, 13, 17, 5],
-                [19, 8, 7, 25, 23],
-                [20, 11, 10, 24, 4],
-                [14, 21, 16, 12, 6],
-            ],
-        ]
-        with open(file, "r") as f:
-            n, b = read_input(f)
-            self.assertListEqual(numbers, n)
-            self.assertListEqual(boards, b)
-
-    def test_read_input_03(self):
-        file = "input_03.txt"
-        numbers = [7, 4, 9]
-        boards = [
-            [
-                [22, 13, 17, 11, 0],
-                [8, 2, 23, 4, 24],
-                [21, 9, 14, 16, 7],
-                [6, 10, 3, 18, 5],
-                [1, 12, 20, 15, 19],
-            ]
-        ]
-        with open(file, "r") as f:
-            n, b = read_input(f)
-            self.assertListEqual(numbers, n)
-            self.assertListEqual(boards, b)
 
 
 if __name__ == '__main__':
