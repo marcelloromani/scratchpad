@@ -287,15 +287,17 @@ class TestSampleInput(unittest.TestCase):
             numbers, boards = read_input(f)
 
             is_winning, drawn = is_winning_board(boards[0], numbers)
-            self.assertFalse(is_winning, 'board0')
-            self.assertListEqual(numbers, drawn, 'board0')
+            self.assertTrue(is_winning, 'board0')
+            expected_drawn = [7, 4, 9, 5, 11, 17, 23, 2, 0, 14, 21, 24, 10, 16]
+            self.assertListEqual(expected_drawn, drawn, 'board0')
 
             is_winning, drawn = is_winning_board(boards[1], numbers)
-            self.assertFalse(is_winning, 'board1')
-            self.assertListEqual(numbers, drawn, 'board1')
+            self.assertTrue(is_winning, 'board1')
+            expected_drawn = [7, 4, 9, 5, 11, 17, 23, 2, 0, 14, 21, 24, 10, 16, 13]
+            self.assertListEqual(expected_drawn, drawn, 'board1')
 
             is_winning, drawn = is_winning_board(boards[2], numbers)
-            self.assertFalse(is_winning, 'board2')
+            self.assertTrue(is_winning, 'board2')
             expected_drawn = [7, 4, 9, 5, 11, 17, 23, 2, 0, 14, 21, 24]
             self.assertListEqual(expected_drawn, drawn, 'board2')
 
