@@ -114,6 +114,17 @@ def find_winning_board(boards: list[list[list[int]]], numbers: list[int]) -> (li
             return board, drawn
 
 
+def sum_unmarked_nums(board: list[list[int]], numbers: list[int]) -> int:
+    row_count = len(board)
+    col_count = len(board[0])
+    sum_of_unmarked = 0
+    for i in range(row_count):
+        for j in range(col_count):
+            if board[i][j] not in numbers:
+                sum_of_unmarked += board[i][j]
+    return sum_of_unmarked
+
+
 def main():
     nums, boards = read_input(stdin)
 

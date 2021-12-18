@@ -1,6 +1,6 @@
 import unittest
 
-from main import num_pos_in_board, is_winning_board, parse_board, read_input, find_winning_board
+from main import num_pos_in_board, is_winning_board, parse_board, read_input, find_winning_board, sum_unmarked_nums
 
 
 class TestBoard(unittest.TestCase):
@@ -133,6 +133,41 @@ class TestBoard(unittest.TestCase):
             winning_board, drawn_nums = find_winning_board(boards, t["nums"])
             self.assertListEqual(t["winning"], winning_board, t["nums"])
             self.assertListEqual(t["drawn"], drawn_nums, t["nums"])
+
+    def test_sum_unmarked(self):
+        board = [
+            [1, 2],
+            [3, 4],
+        ]
+        test_cases = [
+            {
+                "nums": [],
+                "sum": 10,
+            },
+            {
+                "nums": [1],
+                "sum": 9,
+            },
+            {
+                "nums": [3],
+                "sum": 7,
+            },
+            {
+                "nums": [1, 2, 4],
+                "sum": 3,
+            },
+            {
+                "nums": [4, 3, 2, 1],
+                "sum": 0,
+            },
+            {
+                "nums": [1, 1, 1, 1],
+                "sum": 9,
+            },
+        ]
+        for t in test_cases:
+            actual = sum_unmarked_nums(board, t["nums"])
+            self.assertEqual(t["sum"], actual, t["nums"])
 
 
 class TestInput(unittest.TestCase):
