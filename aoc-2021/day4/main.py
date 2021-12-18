@@ -98,9 +98,11 @@ def is_winning_board(board: list[list[int]], numbers: list[int]) -> (bool, int):
 
 
 def main():
-    lines = stdin.readlines()
+    nums, boards = read_input(stdin)
 
-    lines = list(purge_blanks(lines))
+    print(nums)
+
+    print(boards)
 
 
 if __name__ == "__main__":
