@@ -103,28 +103,28 @@ class TestBoard(unittest.TestCase):
 
     def test_get_num_position(self):
         board = [
-            [1, 2],
-            [3, 4],
+            [0, 1],
+            [2, 3],
         ]
         test_cases = [
             {
-                "n": 1,
+                "n": 0,
                 "pos": (0, 0),
             },
             {
-                "n": 2,
+                "n": 1,
                 "pos": (0, 1),
             },
             {
-                "n": 3,
+                "n": 2,
                 "pos": (1, 0),
             },
             {
-                "n": 4,
+                "n": 3,
                 "pos": (1, 1),
             },
             {
-                "n": 5,
+                "n": 4,
                 "pos": (-1, -1),
             },
         ]
