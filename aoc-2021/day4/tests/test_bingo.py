@@ -182,6 +182,11 @@ class TestBoard(unittest.TestCase):
                 "win": True,
                 "drawn": [0, 1],
             },
+            {
+                "nums": [3, 0, 6, 1, 4],
+                "win": True,
+                "drawn": [3, 0, 6, 1],
+            },
         ]
         for t in test_cases:
             is_winning, drawn_nums = is_winning_board(board, t["nums"])
