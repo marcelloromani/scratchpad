@@ -1,14 +1,6 @@
 from sys import stdin
 
 
-def purge_blanks(data: list[str]):
-    for d in data:
-        d = d.strip()
-        if len(d) == 0:
-            continue
-        yield d
-
-
 def parse_board(board_text: str) -> list[list[int]]:
     b = []
     for line in board_text.split("\n"):
@@ -19,7 +11,7 @@ def parse_board(board_text: str) -> list[list[int]]:
     return b
 
 
-def read_input(filename: str) -> (list[int], list[list[list[int]]]):
+def read_input(f) -> (list[int], list[list[list[int]]]):
     WAITING_FOR_NUMBERS: int = 1
     WAITING_FOR_BOARDS: int = 2
     READING_BOARD: int = 3
@@ -30,34 +22,33 @@ def read_input(filename: str) -> (list[int], list[list[list[int]]]):
     boards = []
     board_txt = ""
 
-    with open(filename, "r") as f:
-        for line in f.readlines():
-            line = line.strip()
-            if state == WAITING_FOR_NUMBERS:
-                if len(line) == 0:
-                    continue
-                else:
-                    numbers = [int(x) for x in line.split(",")]
-                    state = WAITING_FOR_BOARDS
-            elif state == WAITING_FOR_BOARDS:
-                if len(line) == 0:
-                    continue
-                else:
-                    state = READING_BOARD
-                    board_txt = line
-            elif state == READING_BOARD:
-                if len(line) == 0:
-                    # finished reading a board
-                    board = parse_board(board_txt)
-                    boards.append(board)
-                    board_txt = ""          # signal that the board has been parsed and added to the result
-                    state = WAITING_FOR_BOARDS
-                else:
-                    # still reading the board
-                    board_txt += '\n'       # need new line to separate lines
-                    board_txt += line
+    for line in f.readlines():
+        line = line.strip()
+        if state == WAITING_FOR_NUMBERS:
+            if len(line) == 0:
+                continue
             else:
-                raise ValueError("Unknown state")
+                numbers = [int(x) for x in line.split(",")]
+                state = WAITING_FOR_BOARDS
+        elif state == WAITING_FOR_BOARDS:
+            if len(line) == 0:
+                continue
+            else:
+                state = READING_BOARD
+                board_txt = line
+        elif state == READING_BOARD:
+            if len(line) == 0:
+                # finished reading a board
+                board = parse_board(board_txt)
+                boards.append(board)
+                board_txt = ""          # signal that the board has been parsed and added to the result
+                state = WAITING_FOR_BOARDS
+            else:
+                # still reading the board
+                board_txt += '\n'       # need new line to separate lines
+                board_txt += line
+        else:
+            raise ValueError("Unknown state")
 
     # if the file doesn't end with a new line, we'll miss the last board
     # so, if board_txt is not empty, it means the last board hasn't been parsed

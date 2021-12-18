@@ -101,9 +101,10 @@ class TestInput(unittest.TestCase):
                 [1, 12, 20, 15, 19],
             ]
         ]
-        n, b = read_input(file)
-        self.assertListEqual(numbers, n)
-        self.assertListEqual(boards, b)
+        with open(file, "r") as f:
+            n, b = read_input(f)
+            self.assertListEqual(numbers, n)
+            self.assertListEqual(boards, b)
 
     def test_read_input_01(self):
         file = "input_01.txt"
@@ -117,9 +118,10 @@ class TestInput(unittest.TestCase):
                 [1, 12, 20, 15, 19],
             ]
         ]
-        n, b = read_input(file)
-        self.assertListEqual(numbers, n)
-        self.assertListEqual(boards, b)
+        with open(file, "r") as f:
+            n, b = read_input(f)
+            self.assertListEqual(numbers, n)
+            self.assertListEqual(boards, b)
 
     def test_read_input_02(self):
         file = "input_02.txt"
@@ -140,9 +142,10 @@ class TestInput(unittest.TestCase):
                 [14, 21, 16, 12, 6],
             ],
         ]
-        n, b = read_input(file)
-        self.assertListEqual(numbers, n)
-        self.assertListEqual(boards, b)
+        with open(file, "r") as f:
+            n, b = read_input(f)
+            self.assertListEqual(numbers, n)
+            self.assertListEqual(boards, b)
 
     def test_read_input_03(self):
         file = "input_03.txt"
@@ -156,9 +159,10 @@ class TestInput(unittest.TestCase):
                 [1, 12, 20, 15, 19],
             ]
         ]
-        n, b = read_input(file)
-        self.assertListEqual(numbers, n)
-        self.assertListEqual(boards, b)
+        with open(file, "r") as f:
+            n, b = read_input(f)
+            self.assertListEqual(numbers, n)
+            self.assertListEqual(boards, b)
 
 
 if __name__ == '__main__':
