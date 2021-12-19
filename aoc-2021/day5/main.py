@@ -25,10 +25,12 @@ def apply_line(board: list[list[int]], line: tuple[int, int, int, int]) -> list[
     result = copy.deepcopy(board)
     x0, y0, x1, y1 = line
     if is_hor(line):
-        for x in range(x0, x1 + 1):
+        begin, end = (x0, x1) if x0 < x1 else (x1, x0)
+        for x in range(begin, end + 1):
             result[y0][x] += 1
     elif is_ver(line):
-        for y in range(y0, y1 + 1):
+        begin, end = (y0, y1) if y0 < y1 else (y1, y0)
+        for y in range(begin, end + 1):
             result[y][x0] += 1
     else:
         raise LineTypeNotSupported("Diagonal lines not supported")

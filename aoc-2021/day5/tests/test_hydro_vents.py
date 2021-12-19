@@ -88,6 +88,22 @@ class TestApplyLinesToBoard(unittest.TestCase):
                     [1, 0, 0],
                 ]
             },
+            {
+                "line": (2, 1, 0, 1),       # reverse line
+                "expected": [
+                    [0, 0, 0],
+                    [1, 1, 1],
+                    [0, 0, 0],
+                ]
+            },
+            {
+                "line": (2, 2, 2, 0),       # reverse line
+                "expected": [
+                    [0, 0, 1],
+                    [0, 0, 1],
+                    [0, 0, 1],
+                ]
+            },
         ]
         for t in test_cases:
             actual = apply_line(self.board, t["line"])
