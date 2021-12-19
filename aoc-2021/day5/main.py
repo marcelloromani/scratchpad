@@ -2,6 +2,10 @@ import copy
 from sys import stdin
 
 
+class LineTypeNotSupported(ValueError):
+    pass
+
+
 def parse_line(line: str) -> tuple[int, int, int, int]:
     line = line.strip()
     line = line.replace('->', ',')
@@ -27,7 +31,7 @@ def apply_line(board: list[list[int]], line: tuple[int, int, int, int]) -> list[
         for y in range(y0, y1 + 1):
             result[y][x0] += 1
     else:
-        raise ValueError("Diagonal lines not supported")
+        raise LineTypeNotSupported("Diagonal lines not supported")
     return result
 
 
@@ -35,7 +39,10 @@ def apply_lines(board: list[list[int]], lines: list[tuple[int, int, int, int]]) 
     # deep copy is performed by apply_line
     result = board
     for line in lines:
-        result = apply_line(result, line)
+        try:
+            result = apply_line(result, line)
+        except LineTypeNotSupported:
+            pass
     return result
 
 

@@ -2,7 +2,7 @@ import copy
 import unittest
 
 from main import is_hor, is_ver, apply_line, apply_lines, count_lines_overlap, parse_line, read_input, \
-    required_board_size, day5_part1
+    required_board_size, day5_part1, init_board
 
 
 class TestReadInput(unittest.TestCase):
@@ -132,6 +132,14 @@ class TestApplyLinesToBoard(unittest.TestCase):
         for t in test_cases:
             actual = apply_lines(self.board, t["lines"])
             self.assertListEqual(t["expected"], actual, t["lines"])
+
+    def test_reject_diagonal_lines(self):
+        lines = [
+            (0, 1, 2, 1),  # OK (horizontal)
+            (0, 0, 2, 2),  # not OK (diagonal)
+        ]
+        board = init_board(3, 3)
+        apply_lines(board, lines)
 
 
 class TestIdentifyPoints(unittest.TestCase):
