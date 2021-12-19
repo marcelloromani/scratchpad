@@ -15,6 +15,14 @@ def apply_line(board: list[list[int]], line: tuple[int, int, int, int]) -> list[
     return result
 
 
+def apply_lines(board: list[list[int]], lines: list[tuple[int, int, int, int]]) -> list[list[int]]:
+    # deep copy is performed by apply_line
+    result = board
+    for line in lines:
+        result = apply_line(result, line)
+    return result
+
+
 def is_hor(line: tuple[int, int, int, int]) -> bool:
     return line[1] == line[3]
 

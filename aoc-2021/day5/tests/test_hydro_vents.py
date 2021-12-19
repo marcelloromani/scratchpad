@@ -1,7 +1,7 @@
 import copy
 import unittest
 
-from main import is_hor, is_ver, apply_line
+from main import is_hor, is_ver, apply_line, apply_lines
 
 
 class TestLines(unittest.TestCase):
@@ -54,6 +54,34 @@ class TestApplyLinesToBoard(unittest.TestCase):
         for t in test_cases:
             actual = apply_line(self.board, t["line"])
             self.assertListEqual(t["expected"], actual, t["line"])
+
+    def test_apply_lines(self):
+        test_cases = [
+            {
+                "lines": [
+                    (1, 1, 2, 1)
+                ],
+                "expected": [
+                    [0, 0, 0],
+                    [0, 1, 1],
+                    [0, 0, 0],
+                ]
+            },
+            {
+                "lines": [
+                    (0, 0, 0, 2),
+                    (0, 1, 2, 1),
+                ],
+                "expected": [
+                    [1, 0, 0],
+                    [2, 1, 1],
+                    [1, 0, 0],
+                ]
+            },
+        ]
+        for t in test_cases:
+            actual = apply_lines(self.board, t["lines"])
+            self.assertListEqual(t["expected"], actual, t["lines"])
 
 
 if __name__ == '__main__':
