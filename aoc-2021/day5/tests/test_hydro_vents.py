@@ -144,7 +144,7 @@ class TestApplyLinesToBoard(unittest.TestCase):
 
 class TestIdentifyPoints(unittest.TestCase):
 
-    def test_apply_lines(self):
+    def count_where_lines_overlap(self):
         test_cases = [
             {
                 "board": [
