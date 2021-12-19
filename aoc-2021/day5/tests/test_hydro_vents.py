@@ -1,7 +1,7 @@
 import copy
 import unittest
 
-from main import is_hor, is_ver, apply_line, apply_lines, count_lines_overlap, parse_line
+from main import is_hor, is_ver, apply_line, apply_lines, count_lines_overlap, parse_line, read_input
 
 
 class TestReadInput(unittest.TestCase):
@@ -15,6 +15,16 @@ class TestReadInput(unittest.TestCase):
         line = "    6, 4  ->   2, 0   "
         expected = (6, 4, 2, 0)
         self.assertEqual(expected, parse_line(line))
+
+    def test_read_input_file(self):
+        expected = [
+            (0, 9, 5, 9),
+            (8, 0, 0, 8),
+        ]
+        filename = 'input_00.txt'
+        with open(filename) as f:
+            actual = read_input(f)
+        self.assertListEqual(expected, actual, filename)
 
 
 class TestLines(unittest.TestCase):

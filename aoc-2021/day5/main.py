@@ -1,4 +1,5 @@
 import copy
+from sys import stdin
 
 
 def parse_line(line: str) -> tuple[int, int, int, int]:
@@ -47,8 +48,28 @@ def count_lines_overlap(board: list[list[int]]) -> int:
     return result
 
 
+def init_board(row_count: int, col_count: int) -> list[list[int]]:
+    rows = [0 for _ in range(col_count)]
+    board = [rows for _ in range(row_count)]
+    return board
+
+
+def read_input(f) -> list[tuple[int, int, int, int]]:
+    result = []
+    for line in f.readlines():
+        line = line.strip()
+        if len(line) == 0:
+            continue
+        t = parse_line(line)
+        result.append(t)
+    return result
+
+
 def main():
-    pass
+    board = init_board(10, 10)
+    lines = read_input(stdin)
+    board = apply_lines(board, lines)
+    print(count_lines_overlap(board))
 
 
 if __name__ == "__main__":
