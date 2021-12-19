@@ -1,6 +1,13 @@
 import copy
 
 
+def parse_line(line: str) -> tuple[int, int, int, int]:
+    line = line.strip()
+    line = line.replace('->', ',')
+    coords = [int(x) for x in line.split(',')]
+    return coords[0], coords[1], coords[2], coords[3]
+
+
 def is_hor(line: tuple[int, int, int, int]) -> bool:
     return line[1] == line[3]
 

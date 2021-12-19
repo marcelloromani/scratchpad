@@ -1,7 +1,20 @@
 import copy
 import unittest
 
-from main import is_hor, is_ver, apply_line, apply_lines, count_lines_overlap
+from main import is_hor, is_ver, apply_line, apply_lines, count_lines_overlap, parse_line
+
+
+class TestReadInput(unittest.TestCase):
+
+    def test_parse_line(self):
+        line = "6,4 -> 2,0"
+        expected = (6, 4, 2, 0)
+        self.assertEqual(expected, parse_line(line))
+
+    def test_parse_line_blanks(self):
+        line = "    6, 4  ->   2, 0   "
+        expected = (6, 4, 2, 0)
+        self.assertEqual(expected, parse_line(line))
 
 
 class TestLines(unittest.TestCase):
