@@ -1,6 +1,14 @@
 import copy
 
 
+def is_hor(line: tuple[int, int, int, int]) -> bool:
+    return line[1] == line[3]
+
+
+def is_ver(line: tuple[int, int, int, int]) -> bool:
+    return line[0] == line[2]
+
+
 def apply_line(board: list[list[int]], line: tuple[int, int, int, int]) -> list[list[int]]:
     result = copy.deepcopy(board)
     x0, y0, x1, y1 = line
@@ -21,14 +29,6 @@ def apply_lines(board: list[list[int]], lines: list[tuple[int, int, int, int]]) 
     for line in lines:
         result = apply_line(result, line)
     return result
-
-
-def is_hor(line: tuple[int, int, int, int]) -> bool:
-    return line[1] == line[3]
-
-
-def is_ver(line: tuple[int, int, int, int]) -> bool:
-    return line[0] == line[2]
 
 
 def count_lines_overlap(board: list[list[int]]) -> int:
