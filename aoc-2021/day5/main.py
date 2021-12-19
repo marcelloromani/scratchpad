@@ -65,6 +65,24 @@ def read_input(f) -> list[tuple[int, int, int, int]]:
     return result
 
 
+def required_board_size(lines: list[tuple[int, int, int, int]]) -> tuple[int, int]:
+    """
+    :return: row_count, col_count
+    """
+    max_r = 0
+    max_c = 0
+    for line in lines:
+        if line[0] > max_c:
+            max_c = line[0]
+        if line[2] > max_c:
+            max_c = line[2]
+        if line[1] > max_r:
+            max_r = line[1]
+        if line[3] > max_r:
+            max_r = line[3]
+    return max_r + 1, max_c + 1
+
+
 def main():
     board = init_board(10, 10)
     lines = read_input(stdin)

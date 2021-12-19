@@ -1,7 +1,7 @@
 import copy
 import unittest
 
-from main import is_hor, is_ver, apply_line, apply_lines, count_lines_overlap, parse_line, read_input
+from main import is_hor, is_ver, apply_line, apply_lines, count_lines_overlap, parse_line, read_input, required_board_size
 
 
 class TestReadInput(unittest.TestCase):
@@ -25,6 +25,20 @@ class TestReadInput(unittest.TestCase):
         with open(filename) as f:
             actual = read_input(f)
         self.assertListEqual(expected, actual, filename)
+
+    def test_get_board_required_size(self):
+        test_cases = [
+            {
+                "lines": [
+                    (1, 1, 2, 1),
+                    (3, 2, 0, 6),
+                ],
+                "expected": (7, 4),
+            },
+        ]
+        for t in test_cases:
+            actual = required_board_size(t["lines"])
+            self.assertEqual(t["expected"], actual, t["lines"])
 
 
 class TestLines(unittest.TestCase):
