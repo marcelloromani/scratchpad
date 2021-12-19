@@ -31,6 +31,15 @@ def is_ver(line: tuple[int, int, int, int]) -> bool:
     return line[0] == line[2]
 
 
+def count_lines_overlap(board: list[list[int]]) -> int:
+    result = 0
+    for line in board:
+        for col in line:
+            if col >= 2:
+                result += 1
+    return result
+
+
 def main():
     pass
 

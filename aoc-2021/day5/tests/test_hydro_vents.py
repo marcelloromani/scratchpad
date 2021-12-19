@@ -1,7 +1,7 @@
 import copy
 import unittest
 
-from main import is_hor, is_ver, apply_line, apply_lines
+from main import is_hor, is_ver, apply_line, apply_lines, count_lines_overlap
 
 
 class TestLines(unittest.TestCase):
@@ -78,10 +78,46 @@ class TestApplyLinesToBoard(unittest.TestCase):
                     [1, 0, 0],
                 ]
             },
+            {
+                "lines": [
+                    (0, 0, 0, 2),
+                    (0, 1, 2, 1),
+                    (0, 1, 1, 1),
+                ],
+                "expected": [
+                    [1, 0, 0],
+                    [3, 2, 1],
+                    [1, 0, 0],
+                ]
+            },
         ]
         for t in test_cases:
             actual = apply_lines(self.board, t["lines"])
             self.assertListEqual(t["expected"], actual, t["lines"])
+
+
+class TestIdentifyPoints(unittest.TestCase):
+
+    def test_apply_lines(self):
+        test_cases = [
+            {
+                "board": [
+                    [0, 0],
+                    [0, 1],
+                ],
+                "expected": 0,
+            },
+            {
+                "board": [
+                    [2, 0],
+                    [3, 1],
+                ],
+                "expected": 2,
+            },
+        ]
+        for t in test_cases:
+            actual = count_lines_overlap(t["board"])
+            self.assertEqual(t["expected"], actual, t["board"])
 
 
 if __name__ == '__main__':
