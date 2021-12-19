@@ -1,7 +1,8 @@
 import unittest
 
-from main import num_pos_in_board, is_winning_board, parse_board, read_input, find_first_winning_board, sum_unmarked_nums, \
-    day4_part1
+from main import num_pos_in_board, is_winning_board, parse_board, read_input, find_first_winning_board, \
+    find_last_winning_board, sum_unmarked_nums, \
+    day4_part1, day4_part2
 
 
 class TestInput(unittest.TestCase):
@@ -271,6 +272,14 @@ class TestSampleInput(unittest.TestCase):
             expected = 4512
             self.assertEqual(expected, actual)
 
+    def test_day4_part2(self):
+        file = "sample_input.txt"
+        with open(file, "r") as f:
+            numbers, boards = read_input(f)
+            actual = day4_part2(boards, numbers)
+            expected = 1924
+            self.assertEqual(expected, actual)
+
     def test_is_winning_board(self):
         file = "sample_input.txt"
         with open(file, "r") as f:
@@ -297,6 +306,14 @@ class TestSampleInput(unittest.TestCase):
             numbers, boards = read_input(f)
             winning_board, drawn_nums = find_first_winning_board(boards, numbers)
             expected_drawn = [7, 4, 9, 5, 11, 17, 23, 2, 0, 14, 21, 24]
+            self.assertListEqual(expected_drawn, drawn_nums)
+
+    def test_last_winning_board(self):
+        file = "sample_input.txt"
+        with open(file, "r") as f:
+            numbers, boards = read_input(f)
+            winning_board, drawn_nums = find_last_winning_board(boards, numbers)
+            expected_drawn = [7, 4, 9, 5, 11, 17, 23, 2, 0, 14, 21, 24, 10, 16, 13]
             self.assertListEqual(expected_drawn, drawn_nums)
 
 

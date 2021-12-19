@@ -125,6 +125,29 @@ def find_first_winning_board(boards: list[list[list[int]]], numbers: list[int]) 
     return boards[shortest_drawn_idx], shortest_drawn
 
 
+def find_last_winning_board(boards: list[list[list[int]]], numbers: list[int]) -> (list[list[int]], int):
+    """
+    :param boards: list of 2d boards to check
+    :param numbers: numbers drawn
+    :return: the board that won with the most numbers drawn, the number drawn when a board won
+    """
+    longest_drawn = None
+    longest_drawn_idx = -1
+    for i in range(len(boards)):
+        is_winning, drawn = is_winning_board(boards[i], numbers)
+        if longest_drawn_idx == -1:
+            if is_winning:
+                longest_drawn_idx = i
+                longest_drawn = drawn
+        else:
+            if is_winning and len(drawn) > len(longest_drawn):
+                longest_drawn_idx = i
+                longest_drawn = drawn
+    if longest_drawn_idx == -1:
+        raise ValueError("No board wins.")
+    return boards[longest_drawn_idx], longest_drawn
+
+
 def sum_unmarked_nums(board: list[list[int]], numbers: list[int]) -> int:
     row_count = len(board)
     col_count = len(board[0])
@@ -143,6 +166,13 @@ def day4_part1(boards, numbers) -> int:
     return last_drawn * sum_of_unmarked
 
 
+def day4_part2(boards, numbers) -> int:
+    winning_board, drawn_nums = find_last_winning_board(boards, numbers)
+    last_drawn = drawn_nums[-1]
+    sum_of_unmarked = sum_unmarked_nums(winning_board, drawn_nums)
+    return last_drawn * sum_of_unmarked
+
+
 def main():
     nums, boards = read_input(stdin)
 
@@ -151,6 +181,7 @@ def main():
     # print(boards)
 
     print(day4_part1(boards, nums))
+    print(day4_part2(boards, nums))
 
 
 if __name__ == "__main__":
