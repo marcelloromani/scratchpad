@@ -1,7 +1,8 @@
 import copy
 import unittest
 
-from main import is_hor, is_ver, apply_line, apply_lines, count_lines_overlap, parse_line, read_input, required_board_size
+from main import is_hor, is_ver, apply_line, apply_lines, count_lines_overlap, parse_line, read_input, \
+    required_board_size, day5_part1
 
 
 class TestReadInput(unittest.TestCase):
@@ -155,6 +156,22 @@ class TestIdentifyPoints(unittest.TestCase):
         for t in test_cases:
             actual = count_lines_overlap(t["board"])
             self.assertEqual(t["expected"], actual, t["board"])
+
+
+class TestEnd2End(unittest.TestCase):
+    file = "sample_input.txt"
+
+    def test_board_size(self):
+        with open(self.file, 'r') as f:
+            lines = read_input(f)
+            row_count, col_count = required_board_size(lines)
+            self.assertEqual((10, 10), (row_count, col_count))
+
+    def test_final_value(self):
+        expected = 5
+        with open(self.file, 'r') as f:
+            actual = day5_part1(f)
+        self.assertEqual(expected, actual)
 
 
 if __name__ == '__main__':

@@ -83,11 +83,16 @@ def required_board_size(lines: list[tuple[int, int, int, int]]) -> tuple[int, in
     return max_r + 1, max_c + 1
 
 
-def main():
-    board = init_board(10, 10)
-    lines = read_input(stdin)
+def day5_part1(f) -> int:
+    lines = read_input(f)
+    row_count, col_count = required_board_size(lines)
+    board = init_board(row_count, col_count)
     board = apply_lines(board, lines)
-    print(count_lines_overlap(board))
+    return count_lines_overlap(board)
+
+
+def main():
+    print(day5_part1(stdin))
 
 
 if __name__ == "__main__":
