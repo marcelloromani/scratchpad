@@ -1,4 +1,3 @@
-import copy
 from sys import stdin
 
 
@@ -21,8 +20,12 @@ def is_ver(line: tuple[int, int, int, int]) -> bool:
     return line[0] == line[2]
 
 
+def deepcopy_2d(board: list[list[int]]) -> list[list[int]]:
+    return [row[:] for row in board]
+
+
 def apply_line(board: list[list[int]], line: tuple[int, int, int, int]) -> list[list[int]]:
-    result = copy.deepcopy(board)
+    result = deepcopy_2d(board)
     x0, y0, x1, y1 = line
     if is_hor(line):
         begin, end = (x0, x1) if x0 < x1 else (x1, x0)

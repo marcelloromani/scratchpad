@@ -81,6 +81,14 @@ class TestApplyLinesToBoard(unittest.TestCase):
                 ]
             },
             {
+                "line": (1, 0, 1, 1),
+                "expected": [
+                    [0, 1, 0],
+                    [0, 1, 0],
+                    [0, 0, 0],
+                ]
+            },
+            {
                 "line": (0, 0, 0, 2),
                 "expected": [
                     [1, 0, 0],
@@ -89,7 +97,7 @@ class TestApplyLinesToBoard(unittest.TestCase):
                 ]
             },
             {
-                "line": (2, 1, 0, 1),       # reverse line
+                "line": (2, 1, 0, 1),  # reverse line
                 "expected": [
                     [0, 0, 0],
                     [1, 1, 1],
@@ -97,7 +105,7 @@ class TestApplyLinesToBoard(unittest.TestCase):
                 ]
             },
             {
-                "line": (2, 2, 2, 0),       # reverse line
+                "line": (2, 2, 2, 0),  # reverse line
                 "expected": [
                     [0, 0, 1],
                     [0, 0, 1],
@@ -182,7 +190,7 @@ class TestIdentifyPoints(unittest.TestCase):
             self.assertEqual(t["expected"], actual, t["board"])
 
 
-class TestEnd2End(unittest.TestCase):
+class TestSampleInput(unittest.TestCase):
     file = "sample_input.txt"
 
     def test_board_size(self):
@@ -190,6 +198,27 @@ class TestEnd2End(unittest.TestCase):
             lines = read_input(f)
             row_count, col_count = required_board_size(lines)
             self.assertEqual((10, 10), (row_count, col_count))
+
+    def test_board(self):
+        expected = [
+            [0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+            [0, 0, 1, 0, 0, 0, 0, 1, 0, 0],
+            [0, 0, 1, 0, 0, 0, 0, 1, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+            [0, 1, 1, 2, 1, 1, 1, 2, 1, 1],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [2, 2, 2, 1, 1, 1, 0, 0, 0, 0],
+        ]
+        with open(self.file, 'r') as f:
+            lines = read_input(f)
+            row_count, col_count = required_board_size(lines)
+            board = init_board(row_count, col_count)
+            board = apply_lines(board, lines)
+            print(board)
+            self.assertListEqual(expected, board)
 
     def test_final_value(self):
         expected = 5
