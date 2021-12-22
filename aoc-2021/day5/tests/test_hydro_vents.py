@@ -2,7 +2,7 @@ import copy
 import unittest
 
 from main import is_hor, is_ver, is_diag45, apply_line, apply_lines, count_lines_overlap, parse_line, read_input, \
-    required_board_size, day5_part1, init_board, LineTypeNotSupported
+    required_board_size, day5_part1, day5_part2, init_board, LineTypeNotSupported
 
 
 class TestReadInput(unittest.TestCase):
@@ -310,10 +310,17 @@ class TestSampleInput(unittest.TestCase):
             board = apply_lines(board, lines)
             self.assertListEqual(expected, board)
 
-    def test_final_value(self):
+    def test_day5_part1(self):
         expected = 5
         with open(self.file, 'r') as f:
             actual = day5_part1(f)
+        self.assertEqual(expected, actual)
+
+
+    def test_day5_part2(self):
+        expected = 12
+        with open(self.file, 'r') as f:
+            actual = day5_part2(f)
         self.assertEqual(expected, actual)
 
 

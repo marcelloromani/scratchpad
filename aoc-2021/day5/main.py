@@ -62,12 +62,12 @@ def apply_line(board: list[list[int]], line: tuple[int, int, int, int], diag: bo
     return result
 
 
-def apply_lines(board: list[list[int]], lines: list[tuple[int, int, int, int]]) -> list[list[int]]:
+def apply_lines(board: list[list[int]], lines: list[tuple[int, int, int, int]], diag: bool = False) -> list[list[int]]:
     # deep copy is performed by apply_line
     result = board
     for line in lines:
         try:
-            result = apply_line(result, line)
+            result = apply_line(result, line, diag)
         except LineTypeNotSupported:
             pass
     return result
@@ -125,8 +125,17 @@ def day5_part1(f) -> int:
     return count_lines_overlap(board)
 
 
+def day5_part2(f) -> int:
+    lines = read_input(f)
+    row_count, col_count = required_board_size(lines)
+    board = init_board(row_count, col_count)
+    board = apply_lines(board, lines, diag=True)
+    return count_lines_overlap(board)
+
+
 def main():
     print(day5_part1(stdin))
+    print(day5_part2(stdin))
 
 
 if __name__ == "__main__":
