@@ -70,7 +70,7 @@ class TestApplyLinesToBoard(unittest.TestCase):
         """
         Ensures that applying a line to the board doesn't change the board passed in as argument.
         """
-        line = (1, 0, 1, 1)
+        line = (1, 1, 2, 1)
         self.assertTrue(is_hor(line))
         board_before = copy.deepcopy(self.board)
         b = apply_line(self.board, line)
