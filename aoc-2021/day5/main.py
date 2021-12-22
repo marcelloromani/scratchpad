@@ -1,4 +1,3 @@
-import copy
 from sys import stdin
 
 
@@ -26,6 +25,10 @@ def is_diag45(line: tuple[int, int, int, int]) -> bool:
     x_delta = abs(x0 - x1)
     y_delta = abs(y0 - y1)
     return x_delta == y_delta
+
+
+def deepcopy_2d(board: list[list[int]]) -> list[list[int]]:
+    return [row[:] for row in board]
 
 
 def _apply_line_hor(board: list[list[int]], line: tuple[int, int, int, int]):
@@ -59,7 +62,7 @@ def apply_line(board: list[list[int]], line: tuple[int, int, int, int], diag: bo
     :param diag: True if 45deg diagonal lines should also be considered
     :return: a new board where the line has been applied
     """
-    result = copy.deepcopy(board)
+    result = deepcopy_2d(board)
     if is_hor(line):
         _apply_line_hor(result, line)
     elif is_ver(line):
