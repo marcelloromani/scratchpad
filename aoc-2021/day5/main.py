@@ -38,6 +38,13 @@ def _apply_line_hor(board: list[list[int]], line: tuple[int, int, int, int]):
         board[y0][x] += 1
 
 
+def _apply_line_ver(board: list[list[int]], line: tuple[int, int, int, int]):
+    x0, y0, x1, y1 = line
+    begin, end = (y0, y1) if y0 < y1 else (y1, y0)
+    for y in range(begin, end + 1):
+        board[y][x0] += 1
+
+
 def apply_line(board: list[list[int]], line: tuple[int, int, int, int], diag: bool = False) -> list[list[int]]:
     """
     :param board: initial board
@@ -50,9 +57,7 @@ def apply_line(board: list[list[int]], line: tuple[int, int, int, int], diag: bo
     if is_hor(line):
         _apply_line_hor(result, line)
     elif is_ver(line):
-        begin, end = (y0, y1) if y0 < y1 else (y1, y0)
-        for y in range(begin, end + 1):
-            result[y][x0] += 1
+        _apply_line_ver(result, line)
     elif is_diag45(line):
         if not diag:
             raise LineTypeNotSupported("Diagonal lines not supported")
