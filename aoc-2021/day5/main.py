@@ -45,6 +45,16 @@ def _apply_line_ver(board: list[list[int]], line: tuple[int, int, int, int]):
         board[y][x0] += 1
 
 
+def _apply_line_diag45(board: list[list[int]], line: tuple[int, int, int, int]):
+    x0, y0, x1, y1 = line
+    step_count = abs(x0 - x1) + 1
+    dir_x = 1 if x0 < x1 else -1
+    dir_y = 1 if y0 < y1 else -1
+
+    for i in range(step_count):
+        board[y0 + i * dir_y][x0 + i * dir_x] += 1
+
+
 def apply_line(board: list[list[int]], line: tuple[int, int, int, int], diag: bool = False) -> list[list[int]]:
     """
     :param board: initial board
@@ -53,7 +63,6 @@ def apply_line(board: list[list[int]], line: tuple[int, int, int, int], diag: bo
     :return: a new board where the line has been applied
     """
     result = deepcopy_2d(board)
-    x0, y0, x1, y1 = line
     if is_hor(line):
         _apply_line_hor(result, line)
     elif is_ver(line):
@@ -61,12 +70,7 @@ def apply_line(board: list[list[int]], line: tuple[int, int, int, int], diag: bo
     elif is_diag45(line):
         if not diag:
             raise LineTypeNotSupported("Diagonal lines not supported")
-        step_count = abs(x0 - x1) + 1
-        dir_x = 1 if x0 < x1 else -1
-        dir_y = 1 if y0 < y1 else -1
-
-        for i in range(step_count):
-            result[y0 + i * dir_y][x0 + i * dir_x] += 1
+        _apply_line_diag45(result, line)
     else:
         raise LineTypeNotSupported("not hor, nor ver, hor diag45")
     return result
