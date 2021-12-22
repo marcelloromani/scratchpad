@@ -2,7 +2,7 @@ import copy
 import unittest
 
 from main import is_hor, is_ver, is_diag45, apply_line, apply_lines, count_lines_overlap, parse_line, read_input, \
-    required_board_size, day5_part1, init_board
+    required_board_size, day5_part1, init_board, LineTypeNotSupported
 
 
 class TestReadInput(unittest.TestCase):
@@ -75,7 +75,7 @@ class TestApplyLinesToBoard(unittest.TestCase):
         self.assertIsNot(self.board, b)
         self.assertListEqual(board_before, self.board)
 
-    def test_apply_line(self):
+    def test_apply_line_hor_ver(self):
         test_cases = [
             {
                 "desc": "hor left -> right",
@@ -113,18 +113,75 @@ class TestApplyLinesToBoard(unittest.TestCase):
                     [0, 0, 0],
                 ]
             },
+        ]
+        for t in test_cases:
+            actual = apply_line(self.board, t["line"])
+            self.assertListEqual(t["expected"], actual, f"{t['line']} {t['desc']}")
+
+    def test_reject_diag45(self):
+        line = (0, 0, 2, 2)
+        self.assertTrue(is_diag45(line))  # sanity check on test data
+        self.assertRaises(LineTypeNotSupported, apply_line, self.board, line)
+
+    def test_apply_line_diag45(self):
+        test_cases = [
             {
-                "desc": "ver bottom -> up",
-                "line": (2, 2, 2, 0),
+                "desc": "diag topLeft -> botRight",
+                "line": (0, 0, 2, 2),
+                "expected": [
+                    [1, 0, 0],
+                    [0, 1, 0],
+                    [0, 0, 1],
+                ]
+            },
+            {
+                "desc": "diag botRight -> topLeft",
+                "line": (2, 2, 0, 0),
+                "expected": [
+                    [1, 0, 0],
+                    [0, 1, 0],
+                    [0, 0, 1],
+                ]
+            },
+            {
+                "desc": "diag topRight -> botLeft",
+                "line": (2, 0, 0, 2),
                 "expected": [
                     [0, 0, 1],
+                    [0, 1, 0],
+                    [1, 0, 0],
+                ]
+            },
+            {
+                "desc": "diag botLeft -> topRight",
+                "line": (0, 2, 2, 0),
+                "expected": [
                     [0, 0, 1],
+                    [0, 1, 0],
+                    [1, 0, 0],
+                ]
+            },
+            {
+                "desc": "diag topLeft -> botRight",
+                "line": (1, 1, 2, 2),
+                "expected": [
+                    [0, 0, 0],
+                    [0, 1, 0],
+                    [0, 0, 1],
+                ]
+            },
+            {
+                "desc": "diag botRight -> topLeft",
+                "line": (2, 2, 1, 1),
+                "expected": [
+                    [0, 0, 0],
+                    [0, 1, 0],
                     [0, 0, 1],
                 ]
             },
         ]
         for t in test_cases:
-            actual = apply_line(self.board, t["line"])
+            actual = apply_line(self.board, t["line"], diag=True)
             self.assertListEqual(t["expected"], actual, f"{t['line']} {t['desc']}")
 
     def test_apply_lines(self):
