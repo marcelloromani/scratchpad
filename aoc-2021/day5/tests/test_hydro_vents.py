@@ -78,6 +78,7 @@ class TestApplyLinesToBoard(unittest.TestCase):
     def test_apply_line(self):
         test_cases = [
             {
+                "desc": "hor left -> right",
                 "line": (1, 1, 2, 1),
                 "expected": [
                     [0, 0, 0],
@@ -86,6 +87,7 @@ class TestApplyLinesToBoard(unittest.TestCase):
                 ]
             },
             {
+                "desc": "ver top -> bottom",
                 "line": (1, 0, 1, 1),
                 "expected": [
                     [0, 1, 0],
@@ -94,6 +96,7 @@ class TestApplyLinesToBoard(unittest.TestCase):
                 ]
             },
             {
+                "desc": "ver top -> bottom",
                 "line": (0, 0, 0, 2),
                 "expected": [
                     [1, 0, 0],
@@ -102,7 +105,8 @@ class TestApplyLinesToBoard(unittest.TestCase):
                 ]
             },
             {
-                "line": (2, 1, 0, 1),  # reverse line
+                "desc": "hor right -> left",
+                "line": (2, 1, 0, 1),
                 "expected": [
                     [0, 0, 0],
                     [1, 1, 1],
@@ -110,7 +114,8 @@ class TestApplyLinesToBoard(unittest.TestCase):
                 ]
             },
             {
-                "line": (2, 2, 2, 0),  # reverse line
+                "desc": "ver bottom -> up",
+                "line": (2, 2, 2, 0),
                 "expected": [
                     [0, 0, 1],
                     [0, 0, 1],
@@ -120,7 +125,7 @@ class TestApplyLinesToBoard(unittest.TestCase):
         ]
         for t in test_cases:
             actual = apply_line(self.board, t["line"])
-            self.assertListEqual(t["expected"], actual, t["line"])
+            self.assertListEqual(t["expected"], actual, f"{t['line']} {t['desc']}")
 
     def test_apply_lines(self):
         test_cases = [
