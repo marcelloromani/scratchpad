@@ -31,7 +31,13 @@ def deepcopy_2d(board: list[list[int]]) -> list[list[int]]:
     return [row[:] for row in board]
 
 
-def apply_line(board: list[list[int]], line: tuple[int, int, int, int]) -> list[list[int]]:
+def apply_line(board: list[list[int]], line: tuple[int, int, int, int], diag: bool=False) -> list[list[int]]:
+    """
+    :param board: initial board
+    :param line: line to apply to the board
+    :param diag: True if 45deg diagonal lines should also be considered
+    :return: a new board where the line has been applied
+    """
     result = deepcopy_2d(board)
     x0, y0, x1, y1 = line
     if is_hor(line):
@@ -42,8 +48,18 @@ def apply_line(board: list[list[int]], line: tuple[int, int, int, int]) -> list[
         begin, end = (y0, y1) if y0 < y1 else (y1, y0)
         for y in range(begin, end + 1):
             result[y][x0] += 1
-    else:
-        raise LineTypeNotSupported("Diagonal lines not supported")
+    elif is_diag45(line):
+        if not diag:
+            raise LineTypeNotSupported("Diagonal lines not supported")
+        if x0 < x1 and y0 < y1:
+            for i in range(x1 - x0):
+                board[y0 + i][y0 + i] += 1
+        elif x0 > x1 and y0 < y1:
+            pass
+        elif x0 < x1 and y0 > y1:
+            pass
+        else: # x0 > x1 and y0 > y1
+            pass
     return result
 
 
