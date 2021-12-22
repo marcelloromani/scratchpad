@@ -5,6 +5,26 @@ from main import is_hor, is_ver, is_diag45, apply_line, apply_lines, count_lines
     required_board_size, day5_part1, day5_part2, init_board, LineTypeNotSupported
 
 
+class TestInitBoard(unittest.TestCase):
+
+    def test_init_board(self):
+        expected = [
+            [0, 0],
+            [0, 0],
+        ]
+        actual = init_board(2, 2)
+        self.assertListEqual(expected, actual)
+
+    def test_modify_row(self):
+        expected = [
+            [0, 0],
+            [1, 1],
+        ]
+        actual = init_board(2, 2)
+        actual[1][0] += 1
+        actual[1][1] += 1
+        self.assertListEqual(expected, actual)
+
 class TestReadInput(unittest.TestCase):
 
     def test_parse_line(self):

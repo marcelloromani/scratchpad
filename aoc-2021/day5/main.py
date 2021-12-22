@@ -98,7 +98,7 @@ def count_lines_overlap(board: list[list[int]]) -> int:
 
 def init_board(row_count: int, col_count: int) -> list[list[int]]:
     rows = [0 for _ in range(col_count)]
-    board = [rows for _ in range(row_count)]
+    board = [rows[:] for _ in range(row_count)]
     return board
 
 
