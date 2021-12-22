@@ -51,18 +51,12 @@ def apply_line(board: list[list[int]], line: tuple[int, int, int, int], diag: bo
     elif is_diag45(line):
         if not diag:
             raise LineTypeNotSupported("Diagonal lines not supported")
-        if x0 < x1 and y0 < y1:
-            for i in range(x1 - x0):
-                result[y0 + i][x0 + i] += 1
-        elif x0 > x1 and y0 < y1:
-            for i in range(x0 - x1):
-                result[y0 + i][x1 + 1] += 1
-        elif x0 < x1 and y0 > y1:
-            for i in range(x1 - x0):
-                result[y1 + 1][x0 + 1] += 1
-        else:  # x0 > x1 and y0 > y1
-            for i in range(x1 - x0):
-                result[y1 + i][x0 + i] += 1
+        step_count = abs(x0 - x1) + 1
+        dir_x = 1 if x0 < x1 else -1
+        dir_y = 1 if y0 < y1 else -1
+
+        for i in range(step_count):
+            result[y0 + i * dir_y][x0 + i * dir_x] += 1
     else:
         raise LineTypeNotSupported("not hor, nor ver, hor diag45")
     return result
