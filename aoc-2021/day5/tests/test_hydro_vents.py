@@ -222,7 +222,6 @@ class TestSampleInput(unittest.TestCase):
             row_count, col_count = required_board_size(lines)
             board = init_board(row_count, col_count)
             board = apply_lines(board, lines)
-            print(board)
             self.assertListEqual(expected, board)
 
     def test_final_value(self):
