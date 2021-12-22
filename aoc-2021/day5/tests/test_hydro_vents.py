@@ -25,6 +25,7 @@ class TestInitBoard(unittest.TestCase):
         actual[1][1] += 1
         self.assertListEqual(expected, actual)
 
+
 class TestReadInput(unittest.TestCase):
 
     def test_parse_line(self):
@@ -335,7 +336,6 @@ class TestSampleInput(unittest.TestCase):
         with open(self.file, 'r') as f:
             actual = day5_part1(f)
         self.assertEqual(expected, actual)
-
 
     def test_day5_part2(self):
         expected = 12
