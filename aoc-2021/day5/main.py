@@ -134,7 +134,7 @@ def day5_part2(f) -> int:
 
 
 def main():
-    print(day5_part1(stdin))
+    # print(day5_part1(stdin))
     print(day5_part2(stdin))
 
 
