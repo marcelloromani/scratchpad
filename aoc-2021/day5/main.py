@@ -31,6 +31,13 @@ def deepcopy_2d(board: list[list[int]]) -> list[list[int]]:
     return [row[:] for row in board]
 
 
+def _apply_line_hor(board: list[list[int]], line: tuple[int, int, int, int]):
+    x0, y0, x1, y1 = line
+    begin, end = (x0, x1) if x0 < x1 else (x1, x0)
+    for x in range(begin, end + 1):
+        board[y0][x] += 1
+
+
 def apply_line(board: list[list[int]], line: tuple[int, int, int, int], diag: bool = False) -> list[list[int]]:
     """
     :param board: initial board
@@ -41,9 +48,7 @@ def apply_line(board: list[list[int]], line: tuple[int, int, int, int], diag: bo
     result = deepcopy_2d(board)
     x0, y0, x1, y1 = line
     if is_hor(line):
-        begin, end = (x0, x1) if x0 < x1 else (x1, x0)
-        for x in range(begin, end + 1):
-            result[y0][x] += 1
+        _apply_line_hor(result, line)
     elif is_ver(line):
         begin, end = (y0, y1) if y0 < y1 else (y1, y0)
         for y in range(begin, end + 1):
