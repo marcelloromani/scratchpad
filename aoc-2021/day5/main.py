@@ -31,7 +31,7 @@ def deepcopy_2d(board: list[list[int]]) -> list[list[int]]:
     return [row[:] for row in board]
 
 
-def apply_line(board: list[list[int]], line: tuple[int, int, int, int], diag: bool=False) -> list[list[int]]:
+def apply_line(board: list[list[int]], line: tuple[int, int, int, int], diag: bool = False) -> list[list[int]]:
     """
     :param board: initial board
     :param line: line to apply to the board
