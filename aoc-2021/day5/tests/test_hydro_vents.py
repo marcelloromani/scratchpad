@@ -1,7 +1,7 @@
 import copy
 import unittest
 
-from main import is_hor, is_ver, apply_line, apply_lines, count_lines_overlap, parse_line, read_input, \
+from main import is_hor, is_ver, is_diag45, apply_line, apply_lines, count_lines_overlap, parse_line, read_input, \
     required_board_size, day5_part1, init_board
 
 
@@ -52,6 +52,11 @@ class TestLines(unittest.TestCase):
     def test_ver(self):
         self.assertTrue(is_ver((2, 5, 2, 9)))
         self.assertFalse(is_ver((1, 1, 6, 1)))
+
+    def test_diag45(self):
+        self.assertTrue(is_diag45((1, 1, 5, 5)))
+        self.assertTrue(is_diag45((1, 3, 3, 1)))
+        self.assertFalse(is_diag45((1, 3, 5, 3)))
 
 
 class TestApplyLinesToBoard(unittest.TestCase):

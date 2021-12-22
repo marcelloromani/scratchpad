@@ -20,6 +20,13 @@ def is_ver(line: tuple[int, int, int, int]) -> bool:
     return line[0] == line[2]
 
 
+def is_diag45(line: tuple[int, int, int, int]) -> bool:
+    x0, y0, x1, y1 = line
+    x_delta = abs(x0 - x1)
+    y_delta = abs(y0 - y1)
+    return x_delta == y_delta
+
+
 def deepcopy_2d(board: list[list[int]]) -> list[list[int]]:
     return [row[:] for row in board]
 
