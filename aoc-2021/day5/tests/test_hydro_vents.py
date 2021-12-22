@@ -1,8 +1,7 @@
-import copy
 import unittest
 
 from main import is_hor, is_ver, is_diag45, apply_line, apply_lines, count_lines_overlap, parse_line, read_input, \
-    required_board_size, day5_part1, day5_part2, init_board, LineTypeNotSupported
+    required_board_size, day5_part1, day5_part2, init_board, LineTypeNotSupported, deepcopy_2d
 
 
 class TestInitBoard(unittest.TestCase):
@@ -93,7 +92,7 @@ class TestApplyLinesToBoard(unittest.TestCase):
         """
         line = (1, 1, 2, 1)
         self.assertTrue(is_hor(line))
-        board_before = copy.deepcopy(self.board)
+        board_before = deepcopy_2d(self.board)
         b = apply_line(self.board, line)
         self.assertIsNot(self.board, b)
         self.assertListEqual(board_before, self.board)
@@ -104,7 +103,7 @@ class TestApplyLinesToBoard(unittest.TestCase):
         """
         line = (1, 1, 1, 2)
         self.assertTrue(is_ver(line))
-        board_before = copy.deepcopy(self.board)
+        board_before = (self.board)
         b = apply_line(self.board, line)
         self.assertIsNot(self.board, b)
         self.assertListEqual(board_before, self.board)
@@ -115,7 +114,7 @@ class TestApplyLinesToBoard(unittest.TestCase):
         """
         line = (1, 1, 2, 2)
         self.assertTrue(is_diag45(line))
-        board_before = copy.deepcopy(self.board)
+        board_before = deepcopy_2d(self.board)
         b = apply_line(self.board, line, diag=True)
         self.assertIsNot(self.board, b)
         self.assertListEqual(board_before, self.board)
