@@ -66,12 +66,36 @@ class TestApplyLinesToBoard(unittest.TestCase):
         [0, 0, 0],
     ]
 
-    def test_functional(self):
+    def test_functional_hor(self):
         """
         Ensures that applying a line to the board doesn't change the board passed in as argument.
         """
+        line = (1, 0, 1, 1)
+        self.assertTrue(is_hor(line))
         board_before = copy.deepcopy(self.board)
-        b = apply_line(self.board, (1, 0, 1, 1))
+        b = apply_line(self.board, line)
+        self.assertIsNot(self.board, b)
+        self.assertListEqual(board_before, self.board)
+
+    def test_functional_ver(self):
+        """
+        Ensures that applying a line to the board doesn't change the board passed in as argument.
+        """
+        line = (1, 1, 1, 2)
+        self.assertTrue(is_ver(line))
+        board_before = copy.deepcopy(self.board)
+        b = apply_line(self.board, line)
+        self.assertIsNot(self.board, b)
+        self.assertListEqual(board_before, self.board)
+
+    def test_functional_diag45(self):
+        """
+        Ensures that applying a line to the board doesn't change the board passed in as argument.
+        """
+        line = (1, 1, 2, 2)
+        self.assertTrue(is_diag45(line))
+        board_before = copy.deepcopy(self.board)
+        b = apply_line(self.board, line, diag=True)
         self.assertIsNot(self.board, b)
         self.assertListEqual(board_before, self.board)
 
