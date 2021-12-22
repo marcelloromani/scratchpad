@@ -117,20 +117,20 @@ def required_board_size(lines: list[tuple[int, int, int, int]]) -> tuple[int, in
     return max_r + 1, max_c + 1
 
 
-def day5_part1(f) -> int:
+def _day5(f, diag: bool) -> int:
     lines = read_input(f)
     row_count, col_count = required_board_size(lines)
     board = init_board(row_count, col_count)
-    board = apply_lines(board, lines)
+    board = apply_lines(board, lines, diag)
     return count_lines_overlap(board)
+
+
+def day5_part1(f) -> int:
+    return _day5(f, diag=False)
 
 
 def day5_part2(f) -> int:
-    lines = read_input(f)
-    row_count, col_count = required_board_size(lines)
-    board = init_board(row_count, col_count)
-    board = apply_lines(board, lines, diag=True)
-    return count_lines_overlap(board)
+    return _day5(f, diag=True)
 
 
 def main():
