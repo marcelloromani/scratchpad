@@ -55,36 +55,30 @@ def _apply_line_diag45(board: list[list[int]], line: tuple[int, int, int, int]):
         board[y0 + i * dir_y][x0 + i * dir_x] += 1
 
 
-def apply_line(board: list[list[int]], line: tuple[int, int, int, int], diag: bool = False) -> list[list[int]]:
+def apply_line(board: list[list[int]], line: tuple[int, int, int, int], diag: bool = False):
     """
-    :param board: initial board
+    :param board: board to apply the line to
     :param line: line to apply to the board
     :param diag: True if 45deg diagonal lines should also be considered
-    :return: a new board where the line has been applied
     """
-    result = deepcopy_2d(board)
     if is_hor(line):
-        _apply_line_hor(result, line)
+        _apply_line_hor(board, line)
     elif is_ver(line):
-        _apply_line_ver(result, line)
+        _apply_line_ver(board, line)
     elif is_diag45(line):
         if not diag:
             raise LineTypeNotSupported("Diagonal lines not supported")
-        _apply_line_diag45(result, line)
+        _apply_line_diag45(board, line)
     else:
         raise LineTypeNotSupported("not hor, nor ver, hor diag45")
-    return result
 
 
-def apply_lines(board: list[list[int]], lines: list[tuple[int, int, int, int]], diag: bool = False) -> list[list[int]]:
-    # deep copy is performed by apply_line
-    result = board
+def apply_lines(board: list[list[int]], lines: list[tuple[int, int, int, int]], diag: bool = False):
     for line in lines:
         try:
-            result = apply_line(result, line, diag)
+            apply_line(board, line, diag)
         except LineTypeNotSupported:
             pass
-    return result
 
 
 def count_lines_overlap(board: list[list[int]]) -> int:
@@ -135,7 +129,7 @@ def _day5(f, diag: bool) -> int:
     lines = read_input(f)
     row_count, col_count = required_board_size(lines)
     board = init_board(row_count, col_count)
-    board = apply_lines(board, lines, diag)
+    apply_lines(board, lines, diag)
     return count_lines_overlap(board)
 
 

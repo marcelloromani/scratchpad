@@ -86,39 +86,6 @@ class TestApplyLinesToBoard(unittest.TestCase):
         [0, 0, 0],
     ]
 
-    def test_functional_hor(self):
-        """
-        Ensures that applying a line to the board doesn't change the board passed in as argument.
-        """
-        line = (1, 1, 2, 1)
-        self.assertTrue(is_hor(line))
-        board_before = deepcopy_2d(self.board)
-        b = apply_line(self.board, line)
-        self.assertIsNot(self.board, b)
-        self.assertListEqual(board_before, self.board)
-
-    def test_functional_ver(self):
-        """
-        Ensures that applying a line to the board doesn't change the board passed in as argument.
-        """
-        line = (1, 1, 1, 2)
-        self.assertTrue(is_ver(line))
-        board_before = (self.board)
-        b = apply_line(self.board, line)
-        self.assertIsNot(self.board, b)
-        self.assertListEqual(board_before, self.board)
-
-    def test_functional_diag45(self):
-        """
-        Ensures that applying a line to the board doesn't change the board passed in as argument.
-        """
-        line = (1, 1, 2, 2)
-        self.assertTrue(is_diag45(line))
-        board_before = deepcopy_2d(self.board)
-        b = apply_line(self.board, line, diag=True)
-        self.assertIsNot(self.board, b)
-        self.assertListEqual(board_before, self.board)
-
     def test_apply_line_hor_ver(self):
         test_cases = [
             {
@@ -159,7 +126,8 @@ class TestApplyLinesToBoard(unittest.TestCase):
             },
         ]
         for t in test_cases:
-            actual = apply_line(self.board, t["line"])
+            actual = deepcopy_2d(self.board)
+            apply_line(actual, t["line"])
             self.assertListEqual(t["expected"], actual, f"{t['line']} {t['desc']}")
 
     def test_reject_diag45(self):
@@ -225,7 +193,8 @@ class TestApplyLinesToBoard(unittest.TestCase):
             },
         ]
         for t in test_cases:
-            actual = apply_line(self.board, t["line"], diag=True)
+            actual = deepcopy_2d(self.board)
+            apply_line(actual, t["line"], diag=True)
             self.assertListEqual(t["expected"], actual, f"{t['line']} {t['desc']}")
 
     def test_apply_lines(self):
@@ -265,7 +234,8 @@ class TestApplyLinesToBoard(unittest.TestCase):
             },
         ]
         for t in test_cases:
-            actual = apply_lines(self.board, t["lines"])
+            actual = deepcopy_2d(self.board)
+            apply_lines(actual, t["lines"])
             self.assertListEqual(t["expected"], actual, t["lines"])
 
     def test_reject_diagonal_lines(self):
@@ -327,7 +297,7 @@ class TestSampleInput(unittest.TestCase):
             lines = read_input(f)
             row_count, col_count = required_board_size(lines)
             board = init_board(row_count, col_count)
-            board = apply_lines(board, lines)
+            apply_lines(board, lines)
             self.assertListEqual(expected, board)
 
     def test_day5_part1(self):
