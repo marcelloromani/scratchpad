@@ -6,7 +6,7 @@ def read_world_state(f) -> list[int]:
         line = line.strip()
         if len(line) == 0:
             continue
-        return line.split(',')
+        return [int(x) for x in line.split(',')]
 
 
 def world_state_next_day(state: list[int]):
