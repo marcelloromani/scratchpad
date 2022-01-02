@@ -1,6 +1,6 @@
 import unittest
 
-from handler import parse_event_body, parse_args, hello
+from lambda_handler import parse_event_body, parse_args, handler
 from tests import sample_event_1
 
 
@@ -23,7 +23,7 @@ class TestHandler(unittest.TestCase):
         self.assertRaises(ValueError, parse_args, ' parrot ')
 
     def test_handler(self):
-        ret_val = hello(sample_event_1.event, None)
+        ret_val = handler(sample_event_1.event, None)
         self.assertEqual(200, ret_val['statusCode'])
         self.assertEqual('monkey: Hello World!', ret_val['body'])
 

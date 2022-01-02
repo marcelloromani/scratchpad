@@ -11,7 +11,7 @@ provider:
 
 functions:
   hello:
-    handler: handler.hello
+    handler: lambda_handler.handler
     memorySize: 128
     events:
       - httpApi:

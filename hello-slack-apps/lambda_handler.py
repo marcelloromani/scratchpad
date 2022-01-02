@@ -17,7 +17,7 @@ def parse_args(args: str) -> (str, str):
     return animal, rest
 
 
-def hello(event, context):
+def handler(event, context):
     # print(json.dumps(event))
 
     event_body = parse_event_body(event)
