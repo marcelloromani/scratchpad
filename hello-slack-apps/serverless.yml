@@ -5,6 +5,7 @@ provider:
   name: aws
   runtime: python3.8
   region: eu-west-1
+  logRetentionInDays: 5
   lambdaHashingVersion: '20201221'
 
 functions:
