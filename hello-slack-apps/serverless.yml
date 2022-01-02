@@ -3,6 +3,7 @@ frameworkVersion: '2 || 3'
 
 provider:
   name: aws
+  stage: dev
   runtime: python3.8
   region: eu-west-1
   logRetentionInDays: 5
