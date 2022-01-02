@@ -28,9 +28,11 @@ def handler(event, context):
     # print(json.dumps(event))
 
     app_args = get_args_string_from_event(event)
-    animal, message = parse_args(app_args)
 
-    response_body = f"{animal}: {message}"
-
-    response = {"statusCode": 200, "body": response_body}
+    try:
+        animal, message = parse_args(app_args)
+        response_body = f"{animal}: {message}"
+        response = {"statusCode": 200, "body": response_body}
+    except ValueError as err:
+        response = {"statusCode": 200, "body": "Error: " + str(err), "response_type": "ephemeral"}
     return response
