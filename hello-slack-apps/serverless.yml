@@ -13,5 +13,5 @@ functions:
     handler: handler.hello
     events:
       - httpApi:
-          path: /
+          path: /say
           method: post
