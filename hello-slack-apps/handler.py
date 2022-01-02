@@ -1,4 +1,3 @@
-import json
 from base64 import b64decode
 from urllib.parse import parse_qs
 
@@ -19,7 +18,12 @@ def parse_args(args: str) -> (str, str):
 
 
 def hello(event, context):
-    print(json.dumps(event))
+    # print(json.dumps(event))
 
-    response = {"statusCode": 200, "body": ""}
+    event_body = parse_event_body(event)
+    animal, message = parse_args(event_body['text'][0])
+
+    response_body = f"{animal}: {message}"
+
+    response = {"statusCode": 200, "body": response_body}
     return response
