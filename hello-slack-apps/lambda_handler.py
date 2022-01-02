@@ -11,6 +11,10 @@ def parse_event_body(event: dict) -> dict:
     return qs
 
 
+def get_args_string_from_event(event: dict) -> str:
+    return parse_event_body(event)['text'][0]
+
+
 def parse_args(args: str) -> (str, str):
     elements = args.strip().split()
     if len(elements) < 2:
@@ -23,8 +27,8 @@ def parse_args(args: str) -> (str, str):
 def handler(event, context):
     # print(json.dumps(event))
 
-    event_body = parse_event_body(event)
-    animal, message = parse_args(event_body['text'][0])
+    app_args = get_args_string_from_event(event)
+    animal, message = parse_args(app_args)
 
     response_body = f"{animal}: {message}"
 
