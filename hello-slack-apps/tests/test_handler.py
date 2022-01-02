@@ -1,6 +1,6 @@
 import unittest
 
-from handler import parse_event_body
+from handler import parse_event_body, parse_args
 from tests import sample_event_1
 
 
@@ -9,6 +9,18 @@ class TestHandler(unittest.TestCase):
         body = parse_event_body(sample_event_1.event)
         self.assertListEqual(['/say'], body['command'])
         self.assertListEqual(['monkey Hello World!'], body['text'])
+
+    def test_parse_args(self):
+        animal, text = parse_args(' monkey      Hello   World!  ')
+        self.assertEqual('monkey', animal)
+        self.assertEqual('Hello World!', text)
+
+    def test_parse_args_empty(self):
+        self.assertRaises(ValueError, parse_args, '')
+        self.assertRaises(ValueError, parse_args, '     ')
+
+    def test_parse_args_empty_message(self):
+        self.assertRaises(ValueError, parse_args, ' parrot ')
 
 
 if __name__ == '__main__':
