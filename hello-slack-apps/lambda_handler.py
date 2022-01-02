@@ -3,7 +3,10 @@ from urllib.parse import parse_qs
 
 
 def parse_event_body(event: dict) -> dict:
-    body = b64decode(event['body']).decode()
+    if event['isBase64Encoded']:
+        body = b64decode(event['body']).decode()
+    else:
+        body = event['body']
     qs = parse_qs(body)
     return qs
 
