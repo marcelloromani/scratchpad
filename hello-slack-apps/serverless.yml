@@ -14,7 +14,4 @@ functions:
     events:
       - httpApi:
           path: /
-          method: get
-      - httpApi:
-          path: /
           method: post
