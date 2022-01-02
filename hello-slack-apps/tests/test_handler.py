@@ -1,12 +1,17 @@
 import unittest
 
 from lambda_handler import parse_event_body, parse_args, handler
-from tests import sample_event_1
+from tests import sample_event_1, sample_event_2
 
 
 class TestApp(unittest.TestCase):
-    def test_parse_body(self):
+    def test_parse_body_b64(self):
         body = parse_event_body(sample_event_1.event)
+        self.assertListEqual(['/say'], body['command'])
+        self.assertListEqual(['monkey Hello World!'], body['text'])
+
+    def test_parse_body_plain(self):
+        body = parse_event_body(sample_event_2.event)
         self.assertListEqual(['/say'], body['command'])
         self.assertListEqual(['monkey Hello World!'], body['text'])
 
