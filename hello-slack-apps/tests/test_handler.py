@@ -25,7 +25,7 @@ class TestHandler(unittest.TestCase):
     def test_handler(self):
         ret_val = handler(sample_event_1.event, None)
         self.assertEqual(200, ret_val['statusCode'])
-        self.assertEqual('monkey: Hello World!', ret_val['body'])
+        self.assertEqual('monkey says: Hello World!', ret_val['body'])
 
 
 if __name__ == '__main__':

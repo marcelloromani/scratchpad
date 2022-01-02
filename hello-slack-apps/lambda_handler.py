@@ -31,7 +31,7 @@ def handler(event, context):
 
     try:
         animal, message = parse_args(app_args)
-        response_body = f"{animal}: {message}"
+        response_body = f"{animal} says: {message}"
         response = {"statusCode": 200, "body": response_body}
     except ValueError as err:
         response = {"statusCode": 200, "body": "Error: " + str(err), "response_type": "ephemeral"}
