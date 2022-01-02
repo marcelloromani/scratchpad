@@ -4,7 +4,7 @@ from lambda_handler import parse_event_body, parse_args, handler
 from tests import sample_event_1
 
 
-class TestHandler(unittest.TestCase):
+class TestApp(unittest.TestCase):
     def test_parse_body(self):
         body = parse_event_body(sample_event_1.event)
         self.assertListEqual(['/say'], body['command'])
@@ -21,6 +21,9 @@ class TestHandler(unittest.TestCase):
 
     def test_parse_args_empty_message(self):
         self.assertRaises(ValueError, parse_args, ' parrot ')
+
+
+class TestLambdaHandler(unittest.TestCase):
 
     def test_handler(self):
         ret_val = handler(sample_event_1.event, None)
