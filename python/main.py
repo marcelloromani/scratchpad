@@ -10,13 +10,13 @@ from argparse import ArgumentParser
 from src.logging_utils import log_setup
 
 
-def opt_setup():
+def get_cli_args():
     parser = ArgumentParser()
 
     parser.add_argument(
         "file",
         type=str,
-        help="File to process"
+        help="File to process",
     )
 
     parser.add_argument(
@@ -24,15 +24,14 @@ def opt_setup():
         type=str,
         choices=["DEBUG", "INFO", "ERROR"],
         default="INFO",
-        help="Set log level"
+        help="Set log level",
     )
 
-    return parser
+    return parser.parse_args()
 
 
 def main():
-    parser = opt_setup()
-    args = parser.parse_args()
+    args = get_cli_args()
     log_setup(logging.getLevelName(args.log_level))
 
     logger = logging.getLogger()
