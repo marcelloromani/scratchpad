@@ -1,6 +1,6 @@
 .PHONY: all bin clean
 
-all: hello_world quicksort
+all: hello_world quicksort hello_you
 
 clean:
 	rm -f *.o
@@ -17,3 +17,6 @@ quicksort: bin/quicksort
 bin/quicksort: quicksort.hs
 	ghc -o bin/quicksort quicksort.hs
 
+hello_you: bin/hello_you
+bin/hello_you: hello_you.hs
+	ghc -o bin/hello_you hello_you.hs
